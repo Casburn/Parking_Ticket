@@ -5,15 +5,32 @@ public class ParkingTicket
 
     public String regNum;
 
-    public int hours, minutes;
-
-    public boolean prepaid;
+    public static boolean prepaid;
 
     public int leavingTime, arrivalTime;
 
-    public void validTicket()
+    public static void timeArrived()
     {
-        this.prepaid = false;
+        Random rand = new Random();
+
+        for (int i = 0; i < 1; i++)
+        {
+            int hour = rand.nextInt(24) + 0;
+            int minute = rand.nextInt(60) + 0;
+            System.out.printf(" Time Arrived: " + "%02d:%02d\n", hour, minute);
+        }
+    }
+
+    public static void validTicket()
+    {
+        if (prepaid == true)
+        {
+            System.out.println(" PREPAID TICKET");
+        }
+        else
+        {
+            System.out.println(" DRIVE IN TICKET");
+        }
     }
 
     public static void transactionNum()
@@ -28,29 +45,17 @@ public class ParkingTicket
 
     }
 
-    public void timeArrived()
-    {
-        Random rand = new Random();
-
-        for (int i = 0; i < 1; i++)
-        {
-            int hour = rand.nextInt(24) + 0;
-        }
-    }
-
     public void timeRemaining()
     {
         // to do
-    }
-
-    public void arrivalTime()
-    {
-        this.arrivalTime = 1200;
     }
 
     public static void main(String[] args)
     {
         System.out.println(" Parking Ticket \n+--------------------------+");
         transactionNum();
+        timeArrived();
+        validTicket();
+
     }
 }
