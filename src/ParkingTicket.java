@@ -20,7 +20,13 @@ public class ParkingTicket
     {
         Random random = new Random();
 
-        int num = random.nextInt(900);
+        for (int i = 0; i < 1; i++)
+        {
+            int num = random.nextInt(900) + 100;
+
+            num = random.nextInt(900) + 100;
+            System.out.println(" Transaction Number: " + num);
+        }
 
     }
 
@@ -36,6 +42,7 @@ public class ParkingTicket
 
     public static void main(String[] args)
     {
+        System.out.println(" Parking Ticket \n+--------------------------+");
         transactionNum();
     }
 }
