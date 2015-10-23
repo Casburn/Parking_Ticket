@@ -1,63 +1,45 @@
-import java.util.Random;
-//import java.io.FileReader;
-//import java.util.Scanner;
+import java.io.FileReader;
+import java.util.Scanner;
 
-public class ParkingTicket
+class ParkTick
 {
+    String regNum;
 
-    public String regNum;
+    String arrivalTime;
 
-    public static boolean prepaid;
+    String prepaid;
 
-    public int leavingTime, arrivalTime;
+    String latestLeavingTime;
 
-    public static void timeArrived()
+    public static class ParkingTicket
     {
-        Random rand = new Random();
-
-        for (int i = 0; i < 1; i++)
+        public static void main(String[] args) throws Exception
         {
-            int hour = rand.nextInt(24) + 0;
-            int minute = rand.nextInt(60) + 0;
-            System.out.printf(" Time Arrived: " + "%02d:%02d\n", hour, minute);
+            int numberOfTickets = 5;
+            Tickets[] tickets = new Tickets[numberOfTickets];
+
+            Scanner fin = new Scanner(new FileReader("ParkingTickets.txt"));
+
+            for (int i = 0; i < numberOfTickets; i++)
+            {
+                tickets[i] = new Tickets();
+                tickets[i].regNum = fin.nextLine();
+                tickets[i].arrivalTime = fin.nextLine();
+                tickets[i].prepaid = fin.nextLine();
+                tickets[i].latestLeavingTime = fin.nextLine();
+            }
+
+            fin.close();
+
+            for (int i = 0; i < numberOfTickets; i++)
+            {
+                System.out.println((i + 1) + ". " + tickets[i]);
+            }
         }
     }
 
-    public static void validTicket()
+    public String toString()
     {
-        if (prepaid == true)
-        {
-            System.out.println(" PREPAID TICKET");
-        }
-        else
-        {
-            System.out.println(" DRIVE IN TICKET");
-        }
-    }
-
-    public static void transactionNum()
-    {
-        Random random = new Random();
-
-        for (int i = 0; i < 1; i++)
-        {
-            int num = random.nextInt(900) + 100;
-            System.out.println(" Transaction Number: " + num);
-        }
-    }
-
-    public void timeRemaining()
-    {
-        // to do
-    }
-
-    public static void main(String[] args)
-    {
-        Ticket[] tickets = new Ticket[4];
-
-        System.out.println(" Parking Ticket \n+--------------------------+");
-        transactionNum();
-        timeArrived();
-        validTicket();
+        return (this.regNum + "\n" + this.arrivalTime + "\n" + this.prepaid + "\n" + this.latestLeavingTime);
     }
 }
