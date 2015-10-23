@@ -1,4 +1,5 @@
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
 
 class ParkTick
@@ -13,7 +14,7 @@ class ParkTick
 
     public static class ParkingTicket
     {
-        public static void main(String[] args) throws Exception
+        public static void main(String[] args) throws IOException
         {
             int numberOfTickets = 5;
             Tickets[] tickets = new Tickets[numberOfTickets];

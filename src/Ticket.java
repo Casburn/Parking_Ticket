@@ -52,11 +52,13 @@ public class Ticket
 
         fin.close();
         System.out.println("SO");
-        System.out.println(one.regNum + "\n " + one.arrivalTime + "\n " + one.prepaid + " \n " + one.latestLeavingTime);
-        System.out.println(two.regNum + "\n " + two.arrivalTime + "\n " + two.prepaid + " \n " + two.latestLeavingTime);
-        System.out.println(three.regNum + "\n " + three.arrivalTime + "\n " + three.prepaid + " \n "
+        System.out.println(" " + one.regNum + "\n " + one.arrivalTime + "\n " + one.prepaid + " \n "
+                + one.latestLeavingTime);
+        System.out.println(" " + two.regNum + "\n " + two.arrivalTime + "\n " + two.prepaid + " \n "
+                + two.latestLeavingTime);
+        System.out.println(" " + three.regNum + "\n " + three.arrivalTime + "\n " + three.prepaid + " \n "
                 + three.latestLeavingTime);
-        System.out.println(four.regNum + "\n " + four.arrivalTime + "\n " + four.prepaid + " \n "
+        System.out.println(" " + four.regNum + "\n " + four.arrivalTime + "\n " + four.prepaid + " \n "
                 + four.latestLeavingTime);
         /*
          * System.out.println(five.regNum + "\n " + five.arrivalTime + "\n " + five.prepaid + "  " +
