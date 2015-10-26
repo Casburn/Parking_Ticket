@@ -42,14 +42,6 @@ public class Ticket
         four.prepaid = fin.nextLine();
         four.latestLeavingTime = fin.nextLine();
 
-        /*
-         * Tickets five = new Tickets();
-         * five.regNum = fin.nextLine();
-         * five.arrivalTime = fin.nextLine();
-         * five.prepaid = fin.nextLine();
-         * five.latestLeavingTime = fin.nextLine();
-         */
-
         fin.close();
 
         System.out.println(" PARKING TICKET\n+--------------+\n " + one.regNum + "\n " + one.arrivalTime + "\n "
@@ -60,9 +52,5 @@ public class Ticket
                 + three.prepaid + " \n " + three.latestLeavingTime + "\n");
         System.out.println(" PARKING TICKET\n+--------------+\n " + four.regNum + "\n " + four.arrivalTime + "\n "
                 + four.prepaid + " \n " + four.latestLeavingTime);
-        /*
-         * System.out.println(five.regNum + "\n " + five.arrivalTime + "\n " + five.prepaid + "  " +
-         * five.latestLeavingTime);
-         */
     }
 }
