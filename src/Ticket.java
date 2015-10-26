@@ -1,3 +1,4 @@
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -6,17 +7,31 @@ class Tickets
 {
     String regNum;
 
-    String latestLeavingTime, arrivalTime;
+    String latestLeavingTime;
+
+    String arrivalTime;
 
     String prepaid;
 }
 
 public class Ticket
 {
-    public static void main(String[] args) throws IOException
-    {
 
+    public void main(String[] args) throws IOException
+    {
+        TheTicket();
+    }
+
+    public void TheTicket() throws IOException
+    {
         Scanner fin = new Scanner(new FileReader("ParkingTickets" + ".txt"));
+        BufferedReader in = new BufferedReader(new FileReader("ParkingTickets.txt"));
+        String line;
+        while ((line = in.readLine()) != null)
+        {
+            System.out.println(line);
+        }
+        in.close();
 
         Tickets one = new Tickets();
         one.regNum = fin.nextLine();

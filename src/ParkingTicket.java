@@ -1,46 +1,31 @@
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Scanner;
+import java.util.Random;
 
-class ParkTick
+public class ParkingTicket
 {
-    String regNum;
-
-    String arrivalTime;
-
-    String prepaid;
-
-    String latestLeavingTime;
-
-    public static class ParkingTicket
+    public static void main(String[] args) throws IOException
     {
-        public static void main(String[] args) throws IOException
+        System.out.println("Transaction: " + transactionNum());
+
+        Ticket theTicket = new Ticket();
+        BufferedReader in = new BufferedReader(new FileReader("ParkingTickets.txt"));
+        String line;
+        while ((line = in.readLine()) != null)
         {
-            int numberOfTickets = 5;
-            Tickets[] tickets = new Tickets[numberOfTickets];
-
-            Scanner fin = new Scanner(new FileReader("ParkingTickets.txt"));
-
-            for (int i = 0; i < numberOfTickets; i++)
-            {
-                tickets[i] = new Tickets();
-                tickets[i].regNum = fin.nextLine();
-                tickets[i].arrivalTime = fin.nextLine();
-                tickets[i].prepaid = fin.nextLine();
-                tickets[i].latestLeavingTime = fin.nextLine();
-            }
-
-            fin.close();
-
-            for (int i = 0; i < numberOfTickets; i++)
-            {
-                System.out.println((i + 1) + ". " + tickets[i]);
-            }
+            for (int i = 0; i < 1; ++i)
+                in.readLine();
+            String lineIWant = in.readLine();
+            System.out.println(lineIWant);
         }
+        in.close();
     }
 
-    public String toString()
+    private static int transactionNum()
     {
-        return (this.regNum + "\n" + this.arrivalTime + "\n" + this.prepaid + "\n" + this.latestLeavingTime);
+        Random ran = new Random();
+        int number = ran.nextInt(900) + 100;
+        return number;
     }
 }
