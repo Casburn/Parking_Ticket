@@ -1,18 +1,26 @@
 public class Ticket
 {
-    public static void main(String[] args)
+    String regNum;
+
+    double arrivalTime;
+
+    Boolean prepaid = false;
+
+    double latestLeavingTime;
+
+    public void main(String[] args)
     {
         System.out.println(ParkingTicketOne());
     }
 
-    public static String ParkingTicketOne()
+    public String ParkingTicketOne()
     {
-        String regNum1 = "SY65 OED";
-        int arrivalTime1 = 1406;
-        String prepaid1 = "Drive In";
-        int latestLeavingTime1 = 1606;
+        regNum = "SY65 OED";
+        arrivalTime = 14.06;
+        prepaid = false;
+        latestLeavingTime = 16.06;
 
-        return (regNum1 + "\n" + arrivalTime1 + "\n" + prepaid1 + "\n" + latestLeavingTime1);
+        return (regNum);
 
     }
 }

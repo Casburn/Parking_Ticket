@@ -1,17 +1,17 @@
 public class DriveUpParkingTransaction
 {
-    public static String checkPaided()
+    public void checkPaided()
     {
         Ticket tickets = new Ticket();
 
-        if (tickets.ParkingTicketOne() == "Drive In")
+        if (tickets.prepaid == false)
         {
-            System.out.println("Working");
+            System.out.println("  Ticket Type: Drive In");
         }
         else
         {
             System.out.println("Guess not");
         }
-        return null;
+        return;
     }
 }

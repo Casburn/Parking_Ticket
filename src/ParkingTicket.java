@@ -6,9 +6,10 @@ public class ParkingTicket
     {
         Ticket tickets = new Ticket();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-        System.out.println("Transaction: " + transactionNum());
-        System.out.println(tickets.ParkingTicketOne());
-        System.out.println(test.checkPaided());
+        System.out.println(" \tPARKING TICKET\n+-------------------------------+");
+        System.out.println("  Transaction: " + transactionNum());
+        System.out.println("  Regestration Number: " + tickets.ParkingTicketOne());
+        test.checkPaided();
     }
 
     private static int transactionNum()
