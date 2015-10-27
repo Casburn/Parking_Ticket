@@ -19,6 +19,25 @@ public class ParkingTicket
             String lineIWant = in.readLine();
             System.out.println(lineIWant);
         }
+
+        String info;
+
+        int startLine = 1;
+
+        int endLine = 2;
+
+        for (int i = 0; i < startLine; i++)
+        {
+            info = in.readLine();
+        }
+
+        for (int i = startLine; i < endLine + 1; i++)
+        {
+
+            info = in.readLine();
+
+            System.out.println(info);
+        }
         in.close();
     }
 
