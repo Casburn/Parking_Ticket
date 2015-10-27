@@ -1,24 +1,18 @@
 public class Ticket
 {
-    public void main(String[] args)
+    public static void main(String[] args)
     {
-        ParkingTicketOne();
-        String regNum1 = "SY65 OED";
-        int arrivalTime1 = 1406;
-        boolean prepaid1 = false;
-        int latestLeavingTime1 = 1606;
-
-        System.out.println(regNum1 + arrivalTime1 + prepaid1 + latestLeavingTime1);
+        System.out.println(ParkingTicketOne());
     }
 
-    public void ParkingTicketOne()
+    public static String ParkingTicketOne()
     {
         String regNum1 = "SY65 OED";
         int arrivalTime1 = 1406;
-        boolean prepaid1 = false;
+        String prepaid1 = "Drive In";
         int latestLeavingTime1 = 1606;
 
-        System.out.println(regNum1 + arrivalTime1 + prepaid1 + latestLeavingTime1);
+        return (regNum1 + "\n" + arrivalTime1 + "\n" + prepaid1 + "\n" + latestLeavingTime1);
 
     }
 }
