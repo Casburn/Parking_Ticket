@@ -1,16 +1,16 @@
-SY65 OED /
-14:06 */
-Prepaid*
-16:06/
-SY64 ANF*/
-09:58*
-Drive In /
-18:58*/
-AX09 WER*
+SY65 OED 
+14:06 
+Prepaid
+16:06
+SY64 ANF
+09:58
+Drive In
+18:58
+AX09 WER
 04:40
-Prepaid*/
-04:40*
-AS67 GHF/
-20:35*/
-Drive In*
-21:35/
+Prepaid
+04:40
+AS67 GHF
+20:35
+Drive In
+21:35
