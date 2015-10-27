@@ -1,17 +1,29 @@
 public class DriveUpParkingTransaction
 {
-    public void checkPaided()
-    {
-        Ticket tickets = new Ticket();
 
-        if (tickets.prepaid == false)
+    public void checkPaidOne(Ticket tickets)
+    {
+        if (tickets.prepaid1)
         {
-            System.out.println("  Ticket Type: Drive In");
+            System.out.println("  Ticket Type: Pre-Paid");
         }
         else
         {
-            System.out.println("Guess not");
+            System.out.println("  Ticket Type: Drive In");
         }
-        return;
+
+    }
+
+    public void checkPaidTwo(Ticket tickets)
+    {
+        if (tickets.prepaid2)
+        {
+            System.out.println("  Ticket Type: Pre-Paid");
+        }
+        else
+        {
+            System.out.println("  Ticket Type: Drive In");
+        }
     }
 }
+// PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
