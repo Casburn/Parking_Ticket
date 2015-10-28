@@ -1,3 +1,6 @@
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 public class ParkingTicket
@@ -25,6 +28,7 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transactionNum());
         System.out.println("  Regestration Number: " + tickets.ParkingTicketOne());
         test.checkPaid(tickets);
+        getDate();
     }
 
     private static void checkTicketTwo()
@@ -35,6 +39,7 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transactionNum());
         System.out.println("  Regestration Number: " + tickets.ParkingTicketTwo());
         test.checkPaid(tickets);
+        getDate();
     }
 
     private static void checkTicketThree()
@@ -45,6 +50,7 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transactionNum());
         System.out.println("  Regestration Number: " + tickets.ParkingTicketThree());
         test.checkPaid(tickets);
+        getDate();
     }
 
     private static void checkTicketFour()
@@ -55,5 +61,13 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transactionNum());
         System.out.println("  Regestration Number: " + tickets.ParkingTicketFour());
         test.checkPaid(tickets);
+        getDate();
+    }
+
+    private static void getDate()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
     }
 }
