@@ -6,6 +6,8 @@ public class ParkingTicket
     {
         checkTicketOne();
         checkTicketTwo();
+        checkTicketThree();
+        checkTicketFour();
     }
 
     private static int transactionNum()
@@ -22,7 +24,7 @@ public class ParkingTicket
         System.out.println(" \tPARKING TICKET\n+-------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         System.out.println("  Regestration Number: " + tickets.ParkingTicketOne());
-        test.checkPaidOne(tickets);
+        test.checkPaid(tickets);
     }
 
     private static void checkTicketTwo()
@@ -32,6 +34,26 @@ public class ParkingTicket
         System.out.println(" \n\tPARKING TICKET\n+-------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         System.out.println("  Regestration Number: " + tickets.ParkingTicketTwo());
-        test.checkPaidTwo(tickets);
+        test.checkPaid(tickets);
+    }
+
+    private static void checkTicketThree()
+    {
+        Ticket tickets = new Ticket();
+        DriveUpParkingTransaction test = new DriveUpParkingTransaction();
+        System.out.println(" \n\tPARKING TICKET\n+-------------------------------+");
+        System.out.println("  Transaction: " + transactionNum());
+        System.out.println("  Regestration Number: " + tickets.ParkingTicketThree());
+        test.checkPaid(tickets);
+    }
+
+    private static void checkTicketFour()
+    {
+        Ticket tickets = new Ticket();
+        DriveUpParkingTransaction test = new DriveUpParkingTransaction();
+        System.out.println(" \n\tPARKING TICKET\n+-------------------------------+");
+        System.out.println("  Transaction: " + transactionNum());
+        System.out.println("  Regestration Number: " + tickets.ParkingTicketFour());
+        test.checkPaid(tickets);
     }
 }

@@ -2,27 +2,17 @@ public class Ticket
 {
     String regNum;
 
-    String regNum2;
-
     double arrivalTime;
 
-    boolean prepaid1;
-
-    boolean prepaid2;
+    boolean prepaid;
 
     double latestLeavingTime;
-
-    public void main(String[] args)
-    {
-        System.out.println(ParkingTicketOne());
-        System.out.println(ParkingTicketTwo());
-    }
 
     public String ParkingTicketOne()
     {
         regNum = "SY65 OED";
         arrivalTime = 14.06;
-        prepaid1 = false;
+        prepaid = false;
         latestLeavingTime = 16.06;
 
         return (regNum);
@@ -30,11 +20,31 @@ public class Ticket
 
     public String ParkingTicketTwo()
     {
-        regNum2 = "SY64 ANF";
+        regNum = "SY64 ANF";
         arrivalTime = 09.58;
-        prepaid2 = true;
+        prepaid = true;
         latestLeavingTime = 18.58;
 
-        return (regNum2);
+        return (regNum);
+    }
+
+    public String ParkingTicketThree()
+    {
+        regNum = "AX09 WER";
+        arrivalTime = 04.40;
+        prepaid = false;
+        latestLeavingTime = 04.40;
+
+        return (regNum);
+    }
+
+    public String ParkingTicketFour()
+    {
+        regNum = "SW02 DVA";
+        arrivalTime = 20.35;
+        prepaid = true;
+        latestLeavingTime = 21.35;
+
+        return (regNum);
     }
 }
