@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Ticket
 {
     String regNum;
@@ -26,8 +28,6 @@ public class Ticket
         regNum = "SY64 ANF";
         arrivalTime = 09.58;
         prepaid = true;
-        latestLeavingTime = 18.58;
-        lengthOfTime = 9.00;
 
         return (regNum);
     }
@@ -48,9 +48,16 @@ public class Ticket
         regNum = "SW02 DVA";
         arrivalTime = 20.35;
         prepaid = true;
-        latestLeavingTime = 21.35;
         lengthOfTime = 7.41;
 
         return (regNum);
+    }
+
+    public int driveInLeaveTime()
+    {
+        Random ran = new Random();
+        int number = ran.nextInt(24);
+
+        return number;
     }
 }
