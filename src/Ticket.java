@@ -58,7 +58,7 @@ public class Ticket
         double number = ran.nextInt(24);
 
         double cost = 0;
-        if (number <= 1)
+        if (number > 0 && number <= 1)
         {
             cost = 4.70;
             System.out.println("  Cost: £" + cost);

@@ -2,6 +2,7 @@ public class DriveUpParkingTransaction
 {
     public void checkPaid(Ticket tickets)
     {
+        PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
         if (tickets.prepaid)
         {
             System.out.println("  Ticket Type: Pre-Paid");
@@ -13,4 +14,3 @@ public class DriveUpParkingTransaction
         }
     }
 }
-// PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
