@@ -48,4 +48,17 @@ public class PrePaidParkingTransaction
         }
         return (cost * (10.0f / 100.0f));
     }
+
+    public double lenthOfStay()
+    {
+        return 0;
+    }
+
+    public void overStay(Ticket tickets)
+    {
+        if (lenthOfStay() > tickets.latestLeavingTime)
+        {
+
+        }
+    }
 }

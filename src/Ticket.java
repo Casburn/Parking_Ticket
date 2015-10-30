@@ -14,6 +14,7 @@ public class Ticket
 
     public String ParkingTicketOne()
     {
+        // drive in
         regNum = "SY65 OED";
         // arrivalTime = 14.06;
         prepaid = false;
@@ -23,15 +24,18 @@ public class Ticket
 
     public String ParkingTicketTwo()
     {
+        // prepaid
         regNum = "SY64 ANF";
-        // arrivalTime = 09.58;
+        arrivalTime = 09.58;
         prepaid = true;
+        latestLeavingTime = 18.58;
 
         return (regNum);
     }
 
     public String ParkingTicketThree()
     {
+        // drive in
         regNum = "AX09 WER";
         // arrivalTime = 04.40;
         prepaid = false;
@@ -41,9 +45,11 @@ public class Ticket
 
     public String ParkingTicketFour()
     {
+        // prepaid
         regNum = "SW02 DVA";
-        // arrivalTime = 20.35;
+        arrivalTime = 20.35;
         prepaid = true;
+        latestLeavingTime = 22.35;
 
         return (regNum);
     }
@@ -67,7 +73,7 @@ public class Ticket
         else if (number >= 3 && number <= 4)
         {
             cost = 10.30;
-            System.out.println("  Cost: £");
+            System.out.println("  Cost: £" + cost);
         }
         else if (number >= 5 && number <= 6)
         {

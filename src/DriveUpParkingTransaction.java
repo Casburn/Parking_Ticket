@@ -6,6 +6,7 @@ public class DriveUpParkingTransaction
         {
             PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
             System.out.println("  Ticket Type: Pre-Paid");
+            // prepaidTicket.prepaidParking();
         }
         else
         {
