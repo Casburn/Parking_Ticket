@@ -24,11 +24,12 @@ public class ParkingTicket
     {
         Ticket tickets = new Ticket();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
+
         System.out.println("      \tPARKING TICKET\n+------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
+        getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketOne());
         test.checkPaid(tickets);
-        getDate();
         System.out.println("+------------------------------------+");
     }
 
@@ -38,9 +39,9 @@ public class ParkingTicket
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \n\tPARKING TICKET\n+------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
+        getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketTwo());
         test.checkPaid(tickets);
-        getDate();
         System.out.println("+------------------------------------+");
     }
 
@@ -50,9 +51,9 @@ public class ParkingTicket
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \n\tPARKING TICKET\n+------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
+        getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketThree());
         test.checkPaid(tickets);
-        getDate();
         System.out.println("+------------------------------------+");
     }
 
@@ -62,9 +63,9 @@ public class ParkingTicket
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \n\tPARKING TICKET\n+------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
+        getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketFour());
         test.checkPaid(tickets);
-        getDate();
         System.out.println("+------------------------------------+");
     }
 

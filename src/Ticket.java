@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class Ticket
 {
@@ -57,8 +56,6 @@ public class Ticket
 
     public double driveInLeaveTime()
     {
-        Scanner keyboard = new Scanner(System.in);
-
         Random ran = new Random();
         double number = ran.nextInt(24);
 

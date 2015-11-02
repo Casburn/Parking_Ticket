@@ -10,8 +10,10 @@ public class DriveUpParkingTransaction
         }
         else
         {
+            CreditCardPayment creditCard = new CreditCardPayment();
             System.out.println("  Ticket Type: Drive In");
             System.out.println("  Length of time stayed: " + tickets.driveInLeaveTime() + " hour(s)");
+            creditCard.creditCardDetails();
         }
     }
 }

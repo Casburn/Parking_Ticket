@@ -4,6 +4,7 @@ public class PrePaidParkingTransaction
 {
     public double prepaidParking(Ticket tickets)
     {
+        CreditCardPayment creditCard = new CreditCardPayment();
         Random ran = new Random();
         double cost = 0;
 
@@ -51,8 +52,8 @@ public class PrePaidParkingTransaction
                     cost = 23.70;
                     System.out.println("  Cost: £" + (cost - (cost / 10)));
                 }
+                creditCard.creditCardDetails();
             }
-
         }
         return stay;
     }
