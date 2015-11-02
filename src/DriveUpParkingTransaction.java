@@ -6,8 +6,7 @@ public class DriveUpParkingTransaction
         {
             PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
             System.out.println("  Ticket Type: Pre-Paid");
-            System.out.println("  Length of time stayed: " + prepaidTicket.lenthOfStay());
-            prepaidTicket.prepaidParking();
+            System.out.println("  Length of time stayed: " + prepaidTicket.prepaidParking(tickets));
         }
         else
         {
