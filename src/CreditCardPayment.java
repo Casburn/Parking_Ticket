@@ -5,6 +5,9 @@ import java.util.Scanner;
 
 public class CreditCardPayment
 {
+
+    private static final int creditLength = 16;
+
     public void creditCardDetails()
     {
         Scanner keyboard = new Scanner(System.in);
@@ -13,42 +16,32 @@ public class CreditCardPayment
         Date testDate = null;
         String date;
 
-        System.out.println("  Enter Credit Card Expiry Date (MM/yyyy): ");
-        System.out.print("  >");
-        date = keyboard.next();
-        try
-        {
-            testDate = df.parse(date);
-        }
-        catch (ParseException e)
-        {
-            System.out.println("Invalid format");
-        }
         do
         {
-            System.out.println("  Please enter a valid expiry date: ");
-            System.out.print("  >");
+            System.out.println("  Enter Credit Card Expiry Date (MM/yyyy): ");
+            System.out.print("  > ");
             date = keyboard.next();
+            try
+            {
+                testDate = df.parse(date);
+            }
+            catch (ParseException e)
+            {
+                System.out.println("Invalid format");
+            }
+
         }
         while (!df.format(testDate).equals(date));
 
-        System.out.println("  Please Enter Credit Card Number: ");
-        System.out.print("  >");
-
-        creditNumber = keyboard.next();
-        int creditLength = creditNumber.length();
-
-        if (creditLength == 16)
+        do
         {
-
-            System.out.println("  CARD ACCECPTED");
-        }
-
-        else
-        {
-            System.out.println("  Please enter a valid credit card number: ");
-            System.out.print("  >");
+            // int creditLength = creditNumber.length();
+            System.out.println("  Please Enter Credit Card Number: ");
+            System.out.print("  > ");
             creditNumber = keyboard.next();
         }
+
+        while (creditLength != 16);
+
     }
 }
