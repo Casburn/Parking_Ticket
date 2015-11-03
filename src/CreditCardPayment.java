@@ -9,6 +9,28 @@ public class CreditCardPayment
     {
         Scanner keyboard = new Scanner(System.in);
         String creditNumber;
+        SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
+        Date testDate = null;
+        String date;
+
+        System.out.println("  Enter Credit Card Expiry Date (MM/yyyy): ");
+        System.out.print("  >");
+        date = keyboard.next();
+        try
+        {
+            testDate = df.parse(date);
+        }
+        catch (ParseException e)
+        {
+            System.out.println("Invalid format");
+        }
+        do
+        {
+            System.out.println("  Please enter a valid expiry date: ");
+            System.out.print("  >");
+            date = keyboard.next();
+        }
+        while (!df.format(testDate).equals(date));
 
         System.out.println("  Please Enter Credit Card Number: ");
         System.out.print("  >");
@@ -18,45 +40,15 @@ public class CreditCardPayment
 
         if (creditLength == 16)
         {
-            System.out.println("  Please Enter Credit Card Expiry (MM/YY): ");
-            System.out.print("  >");
-            dates = keyboard.nextInt();
+
             System.out.println("  CARD ACCECPTED");
         }
+
         else
         {
             System.out.println("  Please enter a valid credit card number: ");
             System.out.print("  >");
             creditNumber = keyboard.next();
         }
-    }
-
-    public boolean isThisDateValid(String dateToValidate, String dateFromat)
-    {
-
-        if (dateToValidate == null)
-        {
-            return false;
-        }
-
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFromat);
-        sdf.setLenient(false);
-
-        try
-        {
-
-            // if not valid, it will throw ParseException
-            Date date = sdf.parse(dateToValidate);
-            System.out.println(date);
-
-        }
-        catch (ParseException e)
-        {
-
-            e.printStackTrace();
-            return false;
-        }
-
-        return true;
     }
 }
