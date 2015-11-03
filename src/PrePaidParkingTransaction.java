@@ -16,7 +16,6 @@ public class PrePaidParkingTransaction
             }
             else
             {
-
                 if (stay <= 1)
                 {
                     cost = 4.70;
@@ -52,6 +51,7 @@ public class PrePaidParkingTransaction
                     cost = 23.70;
                     System.out.println("  Cost: £" + (cost - (cost / 10)));
                 }
+
                 creditCard.creditCardDetails();
             }
         }
