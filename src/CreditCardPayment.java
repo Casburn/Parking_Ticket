@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,26 +13,44 @@ public class CreditCardPayment
     {
         Scanner keyboard = new Scanner(System.in);
         String creditNumber;
-        SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
+
+        DateFormat dateFormat = new SimpleDateFormat("  MM/yyyy");
+        Date toDate = new Date();
+
         Date testDate = null;
         String date;
 
-        do
+        try
         {
             System.out.println("  Enter Credit Card Expiry Date (MM/yyyy): ");
             System.out.print("  > ");
             date = keyboard.next();
-            try
+
+            SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
+            Date date1 = df.parse(date);
+            Date date2 = toDate;
+
+            do
             {
-                testDate = df.parse(date);
+                if (date1.after(date2))
+                {
+                    System.out.println("  Valid Expiry Date");
+                }
+                else
+                {
+                    System.out.println("  Invalid Expiry Date");
+                    System.out.println("  Enter Valid Credit Card Expiry Date (MM/yyyy): ");
+                    System.out.print("  > ");
+                    date = keyboard.next();
+                }
             }
-            catch (ParseException e)
-            {
-                System.out.println("Invalid format");
-            }
+            while (date1.before(date2));
 
         }
-        while (!df.format(testDate).equals(date));
+        catch (ParseException ex)
+        {
+            ex.printStackTrace();
+        }
 
         do
         {
