@@ -7,6 +7,14 @@ public class ParkingTicket
 {
     public static void main(String[] args)
     {
+        /*
+         * String outputFile = "PrintOut.csv";
+         * boolean alreadyExists = new File(outputFile).exists();
+         * try
+         * {
+         * CsvWriter csvOutput = new CsvWriter(new FileWriter(outputFile, true), ',')
+         * }
+         */
         checkTicketOne();
         checkTicketTwo();
         checkTicketThree();

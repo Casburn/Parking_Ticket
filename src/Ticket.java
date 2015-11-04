@@ -96,4 +96,9 @@ public class Ticket
 
         return number;
     }
+
+    public String toStringcsvStyle()
+    {
+        return regNum + "," + arrivalTime + "," + prepaid + "," + latestLeavingTime + "," + lengthOfTime;
+    }
 }
