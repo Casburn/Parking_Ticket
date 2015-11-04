@@ -16,7 +16,6 @@ public class Ticket
     {
         // drive in
         regNum = "SY65 OED";
-        // arrivalTime = 14.06;
         prepaid = false;
 
         return (regNum);
@@ -37,7 +36,6 @@ public class Ticket
     {
         // drive in
         regNum = "AX09 WER";
-        // arrivalTime = 04.40;
         prepaid = false;
 
         return (regNum);

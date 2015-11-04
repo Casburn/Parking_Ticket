@@ -24,49 +24,48 @@ public class ParkingTicket
     {
         Ticket tickets = new Ticket();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-
-        System.out.println("      \tPARKING TICKET\n+------------------------------------+");
+        System.out.println("      \tPARKING TICKET\n+-----------------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketOne());
         test.checkPaid(tickets);
-        System.out.println("+------------------------------------+");
+        System.out.println("+-----------------------------------------------+");
     }
 
     private static void checkTicketTwo()
     {
         Ticket tickets = new Ticket();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-        System.out.println("      \n\tPARKING TICKET\n+------------------------------------+");
+        System.out.println("      \n\tPARKING TICKET\n+-----------------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketTwo());
         test.checkPaid(tickets);
-        System.out.println("+------------------------------------+");
+        System.out.println("+-----------------------------------------------+");
     }
 
     private static void checkTicketThree()
     {
         Ticket tickets = new Ticket();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-        System.out.println("      \n\tPARKING TICKET\n+------------------------------------+");
+        System.out.println("      \n\tPARKING TICKET\n+-----------------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketThree());
         test.checkPaid(tickets);
-        System.out.println("+------------------------------------+");
+        System.out.println("+-----------------------------------------------+");
     }
 
     private static void checkTicketFour()
     {
         Ticket tickets = new Ticket();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-        System.out.println("      \n\tPARKING TICKET\n+------------------------------------+");
+        System.out.println("      \n\tPARKING TICKET\n+-----------------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         getDate();
         System.out.println("  Regestration Number: " + tickets.ParkingTicketFour());
         test.checkPaid(tickets);
-        System.out.println("+------------------------------------+");
+        System.out.println("+-----------------------------------------------+");
     }
 
     private static void getDate()
