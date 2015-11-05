@@ -38,7 +38,6 @@ public class CreditCardPayment
                 }
             }
             while (date1.before(date2));
-
         }
 
         catch (ParseException ex)
