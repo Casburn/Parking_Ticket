@@ -13,6 +13,7 @@ public class PrePaidParkingTransaction
             if (stay < (tickets.latestLeavingTime - tickets.arrivalTime))
             {
                 System.out.println("  TICKET PAID");
+                System.out.println("  Length of time stayed: " + stay);
             }
             else
             {
@@ -51,7 +52,7 @@ public class PrePaidParkingTransaction
                     cost = 23.70;
                     System.out.println("  Cost: £" + (cost - (cost / 10)));
                 }
-
+                System.out.println("  Length of time stayed: " + stay);
                 creditCard.creditCardDetails();
             }
         }

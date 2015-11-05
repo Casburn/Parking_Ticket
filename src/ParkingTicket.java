@@ -1,9 +1,13 @@
+import java.io.File;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+//import com.csvreader.CsvWriter;
 
 public class ParkingTicket
 {
@@ -19,6 +23,16 @@ public class ParkingTicket
         for (Ticket ticket : tickets)
         {
             pt.checkTicket(ticket);
+        }
+
+        String outputFile = "CentralLogFile.csv";
+        CSVWriter writer = new CSVWriter(new FileWriter(csv));
+
+        boolean alreadyExists = new File(outputFile).exists();
+
+        if (!alreadyExists)
+        {
+            // csvOutput.write("");
         }
     }
 
