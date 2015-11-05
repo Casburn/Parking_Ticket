@@ -10,11 +10,7 @@ public class CreditCardPayment
     {
         Scanner keyboard = new Scanner(System.in);
         String creditNumber;
-
-        // DateFormat dateFormat = new SimpleDateFormat("  MM/yyyy");
         Date toDate = new Date();
-
-        // Date testDate = null;
         String date;
 
         try
