@@ -1,5 +1,6 @@
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.Random;
 
 public class ParkingTicket
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws FileNotFoundException
     {
         ParkingTicket pt = new ParkingTicket();
         List<Ticket> tickets = new ArrayList<Ticket>();
@@ -24,16 +25,19 @@ public class ParkingTicket
         {
             pt.checkTicket(ticket);
         }
+        PrintWriter pw = new PrintWriter(new File("Test.txt"));
+        StringBuilder sb = new StringBuilder();
 
-        String outputFile = "CentralLogFile.csv";
-        CSVWriter writer = new CSVWriter(new FileWriter(csv));
+        sb.append("transaction number");
+        sb.append("Registration Number");
+        sb.append("Date of Transaction");
+        sb.append("Arrival Time");
+        sb.append("Exit Time");
+        sb.append("Total Time");
+        sb.append("Total Cost");
 
-        boolean alreadyExists = new File(outputFile).exists();
-
-        if (!alreadyExists)
-        {
-            // csvOutput.write("");
-        }
+        pw.write(sb.toString());
+        pw.close();
     }
 
     private static int transactionNum()
