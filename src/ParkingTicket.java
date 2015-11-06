@@ -1,6 +1,7 @@
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,11 +9,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-//import com.csvreader.CsvWriter;
-
 public class ParkingTicket
 {
-    public static void main(String[] args) throws FileNotFoundException
+    public static void main(String[] args) throws FileNotFoundException, IOException
     {
         ParkingTicket pt = new ParkingTicket();
         List<Ticket> tickets = new ArrayList<Ticket>();
@@ -20,24 +19,23 @@ public class ParkingTicket
         tickets.add(new Ticket("SY64 ANF", 09.58, true, 18.58));
         tickets.add(new Ticket("AX09 WER", false));
         tickets.add(new Ticket("SW02 DVA", 20.35, true, 22.35));
+        try
+        {
+            FileWriter writer = new FileWriter("CentralLog.txt", true);
+            BufferedWriter bufferedWriter = new BufferedWriter(writer);
+            bufferedWriter.write("Hello World");
+            bufferedWriter.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         for (Ticket ticket : tickets)
         {
             pt.checkTicket(ticket);
         }
-        PrintWriter pw = new PrintWriter(new File("Test.txt"));
-        StringBuilder sb = new StringBuilder();
 
-        sb.append("transaction number");
-        sb.append("Registration Number");
-        sb.append("Date of Transaction");
-        sb.append("Arrival Time");
-        sb.append("Exit Time");
-        sb.append("Total Time");
-        sb.append("Total Cost");
-
-        pw.write(sb.toString());
-        pw.close();
     }
 
     private static int transactionNum()
