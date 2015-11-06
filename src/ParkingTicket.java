@@ -50,12 +50,12 @@ public class ParkingTicket
     public void checkTicket(Ticket t)
     {
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-        System.out.println("      \tPARKING TICKET\n+-----------------------------------------------+");
+        System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
         System.out.println("  Transaction: " + transactionNum());
         getDate();
         System.out.println("  Regestration Number: " + t.getRegNum());
         test.checkPaid(t);
-        System.out.println("+-----------------------------------------------+");
+        System.out.println("+------------------------------------------------+");
     }
 
     private static void getDate()
