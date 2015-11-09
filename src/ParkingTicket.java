@@ -19,37 +19,54 @@ public class ParkingTicket
         tickets.add(new Ticket("SY64 ANF", 09.58, true, 18.58));
         tickets.add(new Ticket("AX09 WER", false));
         tickets.add(new Ticket("SW02 DVA", 20.35, true, 22.35));
+
+        BufferedWriter bufferedWriter = null;
         try
         {
-            FileWriter writer = new FileWriter("CentralLog.txt", true);
-            BufferedWriter bufferedWriter = new BufferedWriter(writer);
-            bufferedWriter.write("Hello World");
-            bufferedWriter.close();
+            FileWriter writer = new FileWriter("CentralLog.txt", false);
+            bufferedWriter = new BufferedWriter(writer);
+            for (Ticket ticket : tickets)
+            {
+                pt.checkTicket(ticket);
+                bufferedWriter.write(pt.ticketInformation(ticket));
+                bufferedWriter.newLine();
+            }
         }
         catch (IOException e)
         {
             e.printStackTrace();
         }
-
-        for (Ticket ticket : tickets)
+        finally
         {
-            pt.checkTicket(ticket);
+            if (bufferedWriter != null)
+                bufferedWriter.close();
         }
 
     }
 
-    private static int transactionNum()
+    private String ticketInformation(Ticket ticket)
+    {
+        String info;
+
+        info = (ticket.regNum + ", " + ticket.arrivalTime + ", " + ticket.lengthOfTime + ", ");
+
+        return info;
+    }
+
+    private static int transactionNum() throws IOException
     {
         Random ran = new Random();
         int number = ran.nextInt(900) + 100;
+
         return number;
     }
 
-    public void checkTicket(Ticket t)
+    public void checkTicket(Ticket t) throws IOException
     {
+        int transNum = transactionNum();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
-        System.out.println("  Transaction: " + transactionNum());
+        System.out.println("  Transaction: " + transNum);
         getDate();
         System.out.println("  Regestration Number: " + t.getRegNum());
         test.checkPaid(t);
