@@ -15,10 +15,10 @@ public class ParkingTicket
     {
         ParkingTicket pt = new ParkingTicket();
         List<Ticket> tickets = new ArrayList<Ticket>();
-        tickets.add(new Ticket("SY65 OED", false));
+        tickets.add(new Ticket("SY65 OED", 00.00, false, 0));
         tickets.add(new Ticket("SY64 ANF", 09.58, true, 18.58));
         tickets.add(new Ticket("AX09 WER", false));
-        tickets.add(new Ticket("SW02 DVA", 20.35, true, 22.35));
+        tickets.add(new Ticket("SW02 DVA", 06.35, true, 08.35));
 
         BufferedWriter bufferedWriter = null;
         try
@@ -41,15 +41,12 @@ public class ParkingTicket
             if (bufferedWriter != null)
                 bufferedWriter.close();
         }
-
     }
 
     private String ticketInformation(Ticket ticket)
     {
         String info;
-
         info = (ticket.regNum + ", " + ticket.arrivalTime + ", " + ticket.lengthOfTime + ", ");
-
         return info;
     }
 
@@ -57,7 +54,6 @@ public class ParkingTicket
     {
         Random ran = new Random();
         int number = ran.nextInt(900) + 100;
-
         return number;
     }
 

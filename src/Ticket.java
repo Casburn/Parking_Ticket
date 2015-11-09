@@ -33,4 +33,10 @@ public class Ticket
     {
         return regNum + "," + arrivalTime + "," + prepaid + "," + latestLeavingTime + "," + lengthOfTime;
     }
+
+    public double latestTime(DriveUpParkingTransaction dupTran)
+    {
+        latestLeavingTime = arrivalTime + dupTran.driveInLeaveTime();
+        return latestLeavingTime;
+    }
 }
