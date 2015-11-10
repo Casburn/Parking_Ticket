@@ -20,7 +20,7 @@ public class ParkingTicket
         tickets.add(new Ticket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
         tickets.add(new Ticket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
         tickets.add(new Ticket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
-
+        Date timeNow = new Date(2015, 11, 10, 17, 0);
         BufferedWriter bufferedWriter = null;
         try
         {
@@ -28,7 +28,7 @@ public class ParkingTicket
             bufferedWriter = new BufferedWriter(writer);
             for (Ticket ticket : tickets)
             {
-                pt.checkTicket(ticket);
+                pt.checkTicket(ticket, timeNow);
                 bufferedWriter.write(pt.ticketInformation(ticket, dupTran));
                 bufferedWriter.write("");
                 bufferedWriter.newLine();
@@ -68,7 +68,7 @@ public class ParkingTicket
         return number;
     }
 
-    public void checkTicket(Ticket t) throws IOException
+    public void checkTicket(Ticket t, Date timeNow) throws IOException
     {
         int transNum = transactionNum();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
@@ -76,7 +76,7 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transNum);
         getDate();
         System.out.println("  Regestration Number: " + t.getRegNum());
-        test.checkPaid(t);
+        test.checkPaid(t, timeNow);
         System.out.println(t.latestTime(test));
         System.out.println("+------------------------------------------------+");
     }

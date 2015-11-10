@@ -1,14 +1,15 @@
+import java.util.Date;
 import java.util.Random;
 
 public class DriveUpParkingTransaction
 {
-    public void checkPaid(Ticket tickets)
+    public void checkPaid(Ticket tickets, Date timeNow)
     {
         if (tickets.prepaid)
         {
             PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
             System.out.println("  Ticket Type: Pre-Paid");
-            prepaidTicket.prepaidParking(tickets);
+            prepaidTicket.prepaidParking(tickets, timeNow);
         }
         else
         {
@@ -23,7 +24,7 @@ public class DriveUpParkingTransaction
     {
         Random ran = new Random();
         double number = ran.nextInt(24);
-
+        // Do same as prepaid in here and change all
         double cost = 0;
         if (number > 0 && number <= 1)
         {

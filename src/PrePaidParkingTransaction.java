@@ -2,62 +2,58 @@ import java.util.Date;
 
 public class PrePaidParkingTransaction
 {
-    public double prepaidParking(Ticket tickets)
+    public double prepaidParking(Ticket tickets, Date timeNow)
     {
         CreditCardPayment creditCard = new CreditCardPayment();
         double cost = 0;
 
-        Date timeNow = new Date(2015, 11, 10, 17, 0);
-        // try{
-        // // SimpleDateFormat sdf = new SimpleDateFormat(" K:mm");
-        // Date date1 = sdf.parse(tickets.arrivalTime)
-        // }
+        long diffHours = (timeNow.getTime() - tickets.latestLeavingTime.getTime()) / (60 * 60 * 1000);
 
-        if (tickets.latestLeavingTime == timeNow)
+        if (diffHours <= 0)
         {
             System.out.println("  TICKET PAID");
-            System.out.println("  Length of time stayed: " + stay);
+            System.out.println("  Length of time stayed: " + diffHours);
         }
         else
         {
-            if (stay <= 1)
+            if (diffHours <= 1)
             {
                 cost = 4.70;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            else if (stay > 1 && stay <= 2)
+            else if (diffHours > 1 && diffHours <= 2)
             {
                 cost = 7.40;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            else if (stay >= 3 && stay <= 4)
+            else if (diffHours >= 3 && diffHours <= 4)
             {
                 cost = 10.30;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            else if (stay >= 5 && stay <= 6)
+            else if (diffHours >= 5 && diffHours <= 6)
             {
                 cost = 14.80;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            else if (stay >= 7 && stay <= 9)
+            else if (diffHours >= 7 && diffHours <= 9)
             {
                 cost = 17.80;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            else if (stay >= 10 && stay <= 12)
+            else if (diffHours >= 10 && diffHours <= 12)
             {
                 cost = 20.20;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            else if (stay >= 13 && stay <= 24)
+            else if (diffHours >= 13 && diffHours <= 24)
             {
                 cost = 23.70;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
-            System.out.println("  Length of time stayed: " + stay);
+            System.out.println("  Length of time stayed: " + diffHours);
             creditCard.creditCardDetails();
         }
-        return stay;
+        return diffHours;
     }
 }
