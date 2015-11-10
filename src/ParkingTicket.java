@@ -14,11 +14,12 @@ public class ParkingTicket
     public static void main(String[] args) throws FileNotFoundException, IOException
     {
         ParkingTicket pt = new ParkingTicket();
+        DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
         List<Ticket> tickets = new ArrayList<Ticket>();
-        tickets.add(new Ticket("SY65 OED", 00.00, false, 0));
-        tickets.add(new Ticket("SY64 ANF", 09.58, true, 18.58));
-        tickets.add(new Ticket("AX09 WER", false));
-        tickets.add(new Ticket("SW02 DVA", 06.35, true, 08.35));
+        tickets.add(new Ticket("SY65 OED", new Date(2015, 11, 10, 12, 0), false));
+        tickets.add(new Ticket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
+        tickets.add(new Ticket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
+        tickets.add(new Ticket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
 
         BufferedWriter bufferedWriter = null;
         try
@@ -28,7 +29,8 @@ public class ParkingTicket
             for (Ticket ticket : tickets)
             {
                 pt.checkTicket(ticket);
-                bufferedWriter.write(pt.ticketInformation(ticket));
+                bufferedWriter.write(pt.ticketInformation(ticket, dupTran));
+                bufferedWriter.write("");
                 bufferedWriter.newLine();
             }
         }
@@ -43,10 +45,19 @@ public class ParkingTicket
         }
     }
 
-    private String ticketInformation(Ticket ticket)
+    // public double latestTime(DriveUpParkingTransaction dupTran)
+    // {
+    // latestLeavingTime = arrivalTime + dupTran.driveInLeaveTime();
+    // System.out.println(latestLeavingTime);
+    // return latestLeavingTime;
+    // }
+
+    private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran)
     {
         String info;
-        info = (ticket.regNum + ", " + ticket.arrivalTime + ", " + ticket.lengthOfTime + ", ");
+        // if (dupTran.driveInLeaveTime())
+        // ticket.lengthOfTime = ticket.arrivalTime + dupTran.driveInLeaveTime();
+        info = (ticket.regNum + ", " + ticket.arrivalTime + ", " + ticket.lengthOfTime + ", " + ticket.latestLeavingTime);
         return info;
     }
 
@@ -66,6 +77,7 @@ public class ParkingTicket
         getDate();
         System.out.println("  Regestration Number: " + t.getRegNum());
         test.checkPaid(t);
+        System.out.println(t.latestTime(test));
         System.out.println("+------------------------------------------------+");
     }
 

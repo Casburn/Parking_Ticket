@@ -1,22 +1,18 @@
+import java.util.Date;
+
 public class Ticket
 {
     String regNum;
 
-    double arrivalTime;
+    Date arrivalTime;
 
     boolean prepaid;
 
-    double latestLeavingTime;
+    Date latestLeavingTime;
 
     double lengthOfTime;
 
-    public Ticket(String regNum, boolean prepaid)
-    {
-        this.regNum = regNum;
-        this.prepaid = prepaid;
-    }
-
-    public Ticket(String regNum, double arrivalTime, boolean prepaid, double latestLeavingTime)
+    public Ticket(String regNum, Date arrivalTime, boolean prepaid, Date latestLeavingTime)
     {
         this.regNum = regNum;
         this.arrivalTime = arrivalTime;
@@ -24,19 +20,16 @@ public class Ticket
         this.latestLeavingTime = latestLeavingTime;
     }
 
+    public Ticket(String regNum, Date arrivalTime, boolean prepaid)
+    {
+        this.regNum = regNum;
+        this.arrivalTime = arrivalTime;
+        this.prepaid = prepaid;
+        this.latestLeavingTime = arrivalTime;
+    }
+
     public String getRegNum()
     {
         return regNum;
-    }
-
-    public String toStringcsvStyle()
-    {
-        return regNum + "," + arrivalTime + "," + prepaid + "," + latestLeavingTime + "," + lengthOfTime;
-    }
-
-    public double latestTime(DriveUpParkingTransaction dupTran)
-    {
-        latestLeavingTime = arrivalTime + dupTran.driveInLeaveTime();
-        return latestLeavingTime;
     }
 }
