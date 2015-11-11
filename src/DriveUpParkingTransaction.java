@@ -21,7 +21,7 @@ public class DriveUpParkingTransaction
 
     public double driveInLeaveTime(Ticket tickets, Date timeNow)
     {
-        long diffHours = (timeNow.getTime() - tickets.latestLeavingTime.getTime()) / (60 * 60 * 1000);
+        long diffHours = tickets.DifferentHours(timeNow);
 
         double cost = 0;
         if (diffHours > 0 && diffHours <= 1)

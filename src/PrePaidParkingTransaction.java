@@ -5,9 +5,9 @@ public class PrePaidParkingTransaction
     public double prepaidParking(Ticket tickets, Date timeNow)
     {
         CreditCardPayment creditCard = new CreditCardPayment();
-
-        long diffHours = (timeNow.getTime() - tickets.latestLeavingTime.getTime()) / (60 * 60 * 1000);
         double cost = 0;
+
+        long diffHours = tickets.DifferentHours(timeNow);
 
         if (diffHours <= 0)
         {
@@ -56,4 +56,5 @@ public class PrePaidParkingTransaction
         }
         return diffHours;
     }
+
 }

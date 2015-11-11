@@ -32,4 +32,10 @@ public class Ticket
     {
         return regNum;
     }
+
+    public long DifferentHours(Date timeNow)
+    {
+        long diffHours = (timeNow.getTime() - latestLeavingTime.getTime()) / (60 * 60 * 1000);
+        return diffHours;
+    }
 }
