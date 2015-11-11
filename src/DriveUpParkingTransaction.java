@@ -1,5 +1,4 @@
 import java.util.Date;
-import java.util.Random;
 
 public class DriveUpParkingTransaction
 {
@@ -15,53 +14,51 @@ public class DriveUpParkingTransaction
         {
             CreditCardPayment creditCard = new CreditCardPayment();
             System.out.println("  Ticket Type: Drive In");
-            System.out.println("  Length of time stayed: " + driveInLeaveTime() + " hour(s)");
+            System.out.println("  Length of time stayed: " + driveInLeaveTime(tickets, timeNow) + " hour(s)");
             creditCard.creditCardDetails();
         }
     }
 
-    public double driveInLeaveTime()
+    public double driveInLeaveTime(Ticket tickets, Date timeNow)
     {
-        Random ran = new Random();
-        double number = ran.nextInt(24);
-        // Do same as prepaid in here and change all
+        long diffHours = (timeNow.getTime() - tickets.latestLeavingTime.getTime()) / (60 * 60 * 1000);
+
         double cost = 0;
-        if (number > 0 && number <= 1)
+        if (diffHours > 0 && diffHours <= 1)
         {
             cost = 4.70;
             System.out.println("  Cost: £" + cost);
         }
-        else if (number > 1 && number <= 2)
+        else if (diffHours > 1 && diffHours <= 2)
         {
             cost = 7.40;
             System.out.println("  Cost: £" + cost);
         }
-        else if (number >= 3 && number <= 4)
+        else if (diffHours >= 3 && diffHours <= 4)
         {
             cost = 10.30;
             System.out.println("  Cost: £" + cost);
         }
-        else if (number >= 5 && number <= 6)
+        else if (diffHours >= 5 && diffHours <= 6)
         {
             cost = 14.80;
             System.out.println("  Cost: £" + cost);
         }
-        else if (number >= 7 && number <= 9)
+        else if (diffHours >= 7 && diffHours <= 9)
         {
             cost = 17.80;
             System.out.println("  Cost: £" + cost);
         }
-        else if (number >= 10 && number <= 12)
+        else if (diffHours >= 10 && diffHours <= 12)
         {
             cost = 20.20;
             System.out.println("  Cost: £" + cost);
         }
-        else if (number >= 13 && number <= 24)
+        else if (diffHours >= 13 && diffHours <= 24)
         {
             cost = 23.70;
             System.out.println("  Cost: £" + cost);
         }
-
-        return number;
+        return diffHours;
     }
 }

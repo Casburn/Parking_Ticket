@@ -45,18 +45,9 @@ public class ParkingTicket
         }
     }
 
-    // public double latestTime(DriveUpParkingTransaction dupTran)
-    // {
-    // latestLeavingTime = arrivalTime + dupTran.driveInLeaveTime();
-    // System.out.println(latestLeavingTime);
-    // return latestLeavingTime;
-    // }
-
     private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran)
     {
         String info;
-        // if (dupTran.driveInLeaveTime())
-        // ticket.lengthOfTime = ticket.arrivalTime + dupTran.driveInLeaveTime();
         info = (ticket.regNum + ", " + ticket.arrivalTime + ", " + ticket.lengthOfTime + ", " + ticket.latestLeavingTime);
         return info;
     }
@@ -77,7 +68,7 @@ public class ParkingTicket
         getDate();
         System.out.println("  Regestration Number: " + t.getRegNum());
         test.checkPaid(t, timeNow);
-        System.out.println(t.latestTime(test));
+        // System.out.println(test.driveInLeaveTime(t, timeNow));
         System.out.println("+------------------------------------------------+");
     }
 
