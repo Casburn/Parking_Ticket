@@ -2,28 +2,32 @@ import java.util.Date;
 
 public class DriveUpParkingTransaction
 {
-    public void checkPaid(Ticket ticket, Date timeNow)
+    CreditCardPayment creditCard = new CreditCardPayment();
+
+    public CreditCardPayment checkPaid(Ticket ticket, Date timeNow)
     {
         if (ticket.prepaid)
         {
             PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
             System.out.println("  Ticket Type: Pre-Paid");
             prepaidTicket.prepaidParking(ticket, timeNow);
+            return prepaidTicket.creditCard;
         }
         else
         {
-            CreditCardPayment creditCard = new CreditCardPayment();
+
             System.out.println("  Ticket Type: Drive In");
             System.out.println("  Length of time stayed: " + driveInLeaveTime(ticket, timeNow) + " hour(s)");
             creditCard.creditCardDetails();
+            return creditCard;
         }
     }
 
     public double driveInLeaveTime(Ticket tickets, Date timeNow)
     {
         long diffHours = tickets.differentHours(timeNow);
-
         double cost = 0;
+
         if (diffHours > 0 && diffHours <= 1)
         {
             cost = 4.70;

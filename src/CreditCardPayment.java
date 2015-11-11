@@ -5,12 +5,14 @@ import java.util.Scanner;
 
 public class CreditCardPayment
 {
+    String creditNumber;
+
+    Date toDate = new Date();
 
     public void creditCardDetails()
     {
         Scanner keyboard = new Scanner(System.in);
-        String creditNumber;
-        Date toDate = new Date();
+
         String date;
 
         try
@@ -20,7 +22,7 @@ public class CreditCardPayment
             date = keyboard.next();
             SimpleDateFormat df = new SimpleDateFormat("MM/yyyy");
             Date date1 = df.parse(date);
-            Date date2 = toDate;
+            Date date2 = new Date();
             do
             {
                 if (date1.after(date2))
@@ -34,10 +36,10 @@ public class CreditCardPayment
                     System.out.print("  > ");
                     date = keyboard.next();
                     date1 = df.parse(date);
-                    date2 = toDate;
                 }
             }
             while (date1.before(date2));
+            toDate = date1;
         }
 
         catch (ParseException ex)

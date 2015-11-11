@@ -2,11 +2,12 @@ import java.util.Date;
 
 public class PrePaidParkingTransaction
 {
+    CreditCardPayment creditCard = new CreditCardPayment();
+
     public double prepaidParking(Ticket tickets, Date timeNow)
     {
-        CreditCardPayment creditCard = new CreditCardPayment();
-        double cost = 0;
 
+        double cost = 0;
         long diffHours = tickets.differentHours(timeNow);
 
         if (diffHours <= 0)

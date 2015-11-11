@@ -23,23 +23,33 @@ public class ParkingTicket
         tickets.add(new Ticket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
         tickets.add(new Ticket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
         Date timeNow = new Date(2015, 11, 10, 17, 0);
-        BufferedWriter bufferedWriter = null;
         DateFormat dateFormat = new SimpleDateFormat("ddMMyy");
+        DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
         DateFormat timeFormat = new SimpleDateFormat("HH, mm");
 
+        for (Ticket ticket : tickets)
+        {
+            int transNum = pt.increaseTransNum();
+            // pt.checkTicket(ticket, timeNow, transNum);
+            pt.writeToLogFile("CentralLog.txt",
+                    transNum + ", " + pt.ticketInformation(ticket, dupTran, timeNow, dateFormat, timeFormat));
+
+            CreditCardPayment ccp = pt.checkTicket(ticket, timeNow, transNum);
+            pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (ticket.prepaid ? "D" : "O") + ", "
+                    + ccp.creditNumber + ", " + dateFormatForCreditCard.format(ccp.toDate));
+        }
+    }
+
+    private void writeToLogFile(String fileName, String msg)
+    {
+        FileWriter writer = null;
+        BufferedWriter bufferedWriter = null;
         try
         {
-            FileWriter writer = new FileWriter("CentralLog.txt", false);
+            writer = new FileWriter(fileName, true);
             bufferedWriter = new BufferedWriter(writer);
-            for (Ticket ticket : tickets)
-            {
-                int transNum = pt.increaseTransNum();
-                pt.checkTicket(ticket, timeNow, transNum);
-                bufferedWriter.write(transNum + ", "
-                        + pt.ticketInformation(ticket, dupTran, timeNow, dateFormat, timeFormat));
-                bufferedWriter.write("");
-                bufferedWriter.newLine();
-            }
+            bufferedWriter.write(msg);
+            bufferedWriter.newLine();
         }
         catch (IOException e)
         {
@@ -48,7 +58,25 @@ public class ParkingTicket
         finally
         {
             if (bufferedWriter != null)
-                bufferedWriter.close();
+                try
+                {
+                    bufferedWriter.close();
+                }
+                catch (IOException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            if (writer != null)
+                try
+                {
+                    writer.close();
+                }
+                catch (IOException e)
+                {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
         }
     }
 
@@ -65,7 +93,17 @@ public class ParkingTicket
         return info;
     }
 
-    public void checkTicket(Ticket t, Date timeNow, int transNum) throws IOException
+    private static String authorisationInformation(Date timeNow, DateFormat dateFormat)
+    {
+        CreditCardPayment creditDetails = new CreditCardPayment();
+        String authorise;
+
+        authorise = (creditDetails.creditNumber + ", " + dateFormat.format(timeNow));
+
+        return authorise;
+    }
+
+    public CreditCardPayment checkTicket(Ticket t, Date timeNow, int transNum) throws IOException
     {
         DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
@@ -73,8 +111,9 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transNum);
         System.out.println(dateFormat.format(timeNow));
         System.out.println("  Regestration Number: " + t.getRegNum());
-        test.checkPaid(t, timeNow);
+        CreditCardPayment ccp = test.checkPaid(t, timeNow);
         System.out.println("+------------------------------------------------+");
+        return ccp;
     }
 
     public int increaseTransNum()
