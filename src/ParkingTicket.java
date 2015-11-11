@@ -57,11 +57,10 @@ public class ParkingTicket
             DateFormat dateFormat, DateFormat timeFormat) throws IOException
     {
         ParkingTicket pt = new ParkingTicket();
-        PrePaidParkingTransaction preparktran = new PrePaidParkingTransaction();
         String info;
         info = (ticket.regNum + ", " + dateFormat.format(ticket.arrivalTime) + ", "
                 + timeFormat.format(ticket.arrivalTime) + ", " + dateFormat.format(ticket.latestLeavingTime) + ", "
-                + timeFormat.format(ticket.latestLeavingTime) + ", " + (ticket.DifferentHours(timeNow)));
+                + timeFormat.format(ticket.latestLeavingTime) + ", " + (ticket.DifferentHours(timeNow)) + ", " + );
         return info;
     }
 
