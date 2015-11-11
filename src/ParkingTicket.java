@@ -17,7 +17,6 @@ public class ParkingTicket
     {
         ParkingTicket pt = new ParkingTicket();
         DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
-        PrePaidParkingTransaction pppt = new PrePaidParkingTransaction();
         List<Ticket> tickets = new ArrayList<Ticket>();
         tickets.add(new Ticket("SY65 OED", new Date(2015, 11, 10, 12, 0), false));
         tickets.add(new Ticket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
@@ -56,30 +55,26 @@ public class ParkingTicket
     private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran, Date timeNow,
             DateFormat dateFormat, DateFormat timeFormat) throws IOException
     {
-        ParkingTicket pt = new ParkingTicket();
         String info;
+        long diff = (timeNow.getTime() - ticket.arrivalTime.getTime());
+        long diffHours = diff / (60 * 60 * 1000);
+        long diffMinutes = diff / (60 * 1000) % 60;
         info = (ticket.regNum + ", " + dateFormat.format(ticket.arrivalTime) + ", "
                 + timeFormat.format(ticket.arrivalTime) + ", " + dateFormat.format(ticket.latestLeavingTime) + ", "
-                + timeFormat.format(ticket.latestLeavingTime) + ", " + (ticket.DifferentHours(timeNow)) + ", " + );
+                + timeFormat.format(ticket.latestLeavingTime) + ", " + String.format("%02d", diffHours) + ":" + diffMinutes);
         return info;
     }
 
     public void checkTicket(Ticket t, Date timeNow, int transNum) throws IOException
     {
+        DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
         System.out.println("  Transaction: " + transNum);
-        getDate();
+        System.out.println(dateFormat.format(timeNow));
         System.out.println("  Regestration Number: " + t.getRegNum());
         test.checkPaid(t, timeNow);
         System.out.println("+------------------------------------------------+");
-    }
-
-    private static void getDate()
-    {
-        DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
-        Date date = new Date();
-        System.out.println(dateFormat.format(date));
     }
 
     public int increaseTransNum()

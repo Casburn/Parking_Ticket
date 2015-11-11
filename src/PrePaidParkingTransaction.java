@@ -7,7 +7,7 @@ public class PrePaidParkingTransaction
         CreditCardPayment creditCard = new CreditCardPayment();
         double cost = 0;
 
-        long diffHours = tickets.DifferentHours(timeNow);
+        long diffHours = tickets.differentHours(timeNow);
 
         if (diffHours <= 0)
         {
@@ -54,7 +54,7 @@ public class PrePaidParkingTransaction
             System.out.println("  Length of time stayed: " + diffHours);
             creditCard.creditCardDetails();
         }
-        return diffHours;
+        return cost;
     }
 
 }
