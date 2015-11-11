@@ -5,14 +5,14 @@ public class PrePaidParkingTransaction
     public double prepaidParking(Ticket tickets, Date timeNow)
     {
         CreditCardPayment creditCard = new CreditCardPayment();
-        double cost = 0;
 
         long diffHours = (timeNow.getTime() - tickets.latestLeavingTime.getTime()) / (60 * 60 * 1000);
+        double cost = 0;
 
         if (diffHours <= 0)
         {
-            System.out.println("  TICKET PAID");
             System.out.println("  Length of time stayed: " + diffHours);
+            System.out.println("  TICKET PAID");
         }
         else
         {

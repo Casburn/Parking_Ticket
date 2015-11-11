@@ -7,14 +7,17 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
 public class ParkingTicket
 {
+    private int transactioNumber = 0;
+
+    @SuppressWarnings("deprecation")
     public static void main(String[] args) throws FileNotFoundException, IOException
     {
         ParkingTicket pt = new ParkingTicket();
         DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
+        PrePaidParkingTransaction pppt = new PrePaidParkingTransaction();
         List<Ticket> tickets = new ArrayList<Ticket>();
         tickets.add(new Ticket("SY65 OED", new Date(2015, 11, 10, 12, 0), false));
         tickets.add(new Ticket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
@@ -22,14 +25,19 @@ public class ParkingTicket
         tickets.add(new Ticket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
         Date timeNow = new Date(2015, 11, 10, 17, 0);
         BufferedWriter bufferedWriter = null;
+        DateFormat dateFormat = new SimpleDateFormat("ddMMyy");
+        DateFormat timeFormat = new SimpleDateFormat("HH, mm");
+
         try
         {
             FileWriter writer = new FileWriter("CentralLog.txt", false);
             bufferedWriter = new BufferedWriter(writer);
             for (Ticket ticket : tickets)
             {
-                pt.checkTicket(ticket, timeNow);
-                bufferedWriter.write(pt.ticketInformation(ticket, dupTran));
+                int transNum = pt.increaseTransNum();
+                pt.checkTicket(ticket, timeNow, transNum);
+                bufferedWriter.write(transNum + ", "
+                        + pt.ticketInformation(ticket, dupTran, timeNow, dateFormat, timeFormat));
                 bufferedWriter.write("");
                 bufferedWriter.newLine();
             }
@@ -45,30 +53,26 @@ public class ParkingTicket
         }
     }
 
-    private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran)
+    private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran, Date timeNow,
+            DateFormat dateFormat, DateFormat timeFormat) throws IOException
     {
+        ParkingTicket pt = new ParkingTicket();
         String info;
-        info = (ticket.regNum + ", " + ticket.arrivalTime + ", " + ticket.lengthOfTime + ", " + ticket.latestLeavingTime);
+        ticket.lengthOfTime = (timeNow.getTime() - ticket.latestLeavingTime.getTime()) / (60 * 60 * 1000);
+        info = (ticket.regNum + ", " + dateFormat.format(ticket.arrivalTime) + ", "
+                + timeFormat.format(ticket.arrivalTime) + ", " + dateFormat.format(ticket.latestLeavingTime) + ", "
+                + timeFormat.format(ticket.latestLeavingTime) + ", " + timeFormat.format(ticket.lengthOfTime));
         return info;
     }
 
-    private static int transactionNum() throws IOException
+    public void checkTicket(Ticket t, Date timeNow, int transNum) throws IOException
     {
-        Random ran = new Random();
-        int number = ran.nextInt(900) + 100;
-        return number;
-    }
-
-    public void checkTicket(Ticket t, Date timeNow) throws IOException
-    {
-        int transNum = transactionNum();
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
         System.out.println("  Transaction: " + transNum);
         getDate();
         System.out.println("  Regestration Number: " + t.getRegNum());
         test.checkPaid(t, timeNow);
-        // System.out.println(test.driveInLeaveTime(t, timeNow));
         System.out.println("+------------------------------------------------+");
     }
 
@@ -78,4 +82,11 @@ public class ParkingTicket
         Date date = new Date();
         System.out.println(dateFormat.format(date));
     }
+
+    public int increaseTransNum()
+    {
+        transactioNumber++;
+        return transactioNumber;
+    }
+
 }
