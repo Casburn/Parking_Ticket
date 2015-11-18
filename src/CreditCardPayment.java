@@ -17,6 +17,7 @@ public class CreditCardPayment
 
         try
         {
+            // Asks for user input of credit card expiry date
             System.out.println("  Enter Valid Credit Card Expiry Date (MM/yyyy): ");
             System.out.print("  > ");
             date = keyboard.next();
@@ -25,6 +26,7 @@ public class CreditCardPayment
             Date date2 = new Date();
             do
             {
+                // Checks expiry date is valid
                 if (date1.after(date2))
                 {
                     System.out.println("  Valid Expiry Date");
@@ -32,6 +34,7 @@ public class CreditCardPayment
                 }
                 else
                 {
+                    // If not valid then asks for it again
                     System.out.println("  Please Confirm Credit Card Expiry Date: ");
                     System.out.print("  > ");
                     date = keyboard.next();
@@ -49,11 +52,12 @@ public class CreditCardPayment
 
         do
         {
+            // Gets credit card number off of user
             System.out.println("  Please Enter Credit Card Number: ");
             System.out.print("  > ");
             creditNumber = keyboard.next();
         }
-
+        // Makes sure credit card length has 16 numbers
         while (creditNumber.length() != 16);
     }
 }

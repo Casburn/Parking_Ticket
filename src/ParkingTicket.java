@@ -15,25 +15,31 @@ public class ParkingTicket
     @SuppressWarnings("deprecation")
     public static void main(String[] args) throws FileNotFoundException, IOException
     {
+        // creates an instance of this class
         ParkingTicket pt = new ParkingTicket();
+        // Makes an instance of the DriveUpParkingClass
         DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
+        // Creates an array list for the details of each car
         List<Ticket> tickets = new ArrayList<Ticket>();
         tickets.add(new Ticket("SY65 OED", new Date(2015, 11, 10, 12, 0), false));
         tickets.add(new Ticket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
         tickets.add(new Ticket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
         tickets.add(new Ticket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
+        // Sets a leaving time for each car
         Date timeNow = new Date(2015, 11, 10, 17, 0);
+        // Formats the different dates and times
         DateFormat dateFormat = new SimpleDateFormat("ddMMyy");
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
         DateFormat timeFormat = new SimpleDateFormat("HH, mm");
-
+        // Creates a conditional loop, continue until each ticket has been ran through
         for (Ticket ticket : tickets)
         {
+            // Increases the transaction number for each ticket
             int transNum = pt.increaseTransNum();
-            // pt.checkTicket(ticket, timeNow, transNum);
+            // Writes information to the central log
             pt.writeToLogFile("CentralLog.txt",
                     transNum + ", " + pt.ticketInformation(ticket, dupTran, timeNow, dateFormat, timeFormat));
-
+            // Writes information to the Authoristation log
             CreditCardPayment ccp = pt.checkTicket(ticket, timeNow, transNum);
             pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (ticket.prepaid ? "D" : "O") + ", "
                     + ccp.creditNumber + ", " + dateFormatForCreditCard.format(ccp.toDate));
@@ -42,10 +48,12 @@ public class ParkingTicket
 
     private void writeToLogFile(String fileName, String msg)
     {
+        // Creats a file writer
         FileWriter writer = null;
         BufferedWriter bufferedWriter = null;
         try
         {
+            // Writes the information to each file
             writer = new FileWriter(fileName, true);
             bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(msg);
@@ -64,7 +72,6 @@ public class ParkingTicket
                 }
                 catch (IOException e)
                 {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             if (writer != null)
@@ -74,7 +81,6 @@ public class ParkingTicket
                 }
                 catch (IOException e)
                 {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
         }
@@ -83,6 +89,7 @@ public class ParkingTicket
     private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran, Date timeNow,
             DateFormat dateFormat, DateFormat timeFormat) throws IOException
     {
+        // Sets the information that is to be called and displayed in the central log
         String info;
         long diff = (timeNow.getTime() - ticket.arrivalTime.getTime());
         long diffHours = diff / (60 * 60 * 1000);
@@ -93,18 +100,9 @@ public class ParkingTicket
         return info;
     }
 
-    private static String authorisationInformation(Date timeNow, DateFormat dateFormat)
-    {
-        CreditCardPayment creditDetails = new CreditCardPayment();
-        String authorise;
-
-        authorise = (creditDetails.creditNumber + ", " + dateFormat.format(timeNow));
-
-        return authorise;
-    }
-
     public CreditCardPayment checkTicket(Ticket t, Date timeNow, int transNum) throws IOException
     {
+        // Sets the display for the console and calls the information to be printed out
         DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
         DriveUpParkingTransaction test = new DriveUpParkingTransaction();
         System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
@@ -118,8 +116,8 @@ public class ParkingTicket
 
     public int increaseTransNum()
     {
+        // Increases the transaction number
         transactioNumber++;
         return transactioNumber;
     }
-
 }

@@ -14,6 +14,7 @@ public class Ticket
 
     public Ticket(String regNum, Date arrivalTime, boolean prepaid, Date latestLeavingTime)
     {
+        // Creates a constructor that calls the information that is needed
         this.regNum = regNum;
         this.arrivalTime = arrivalTime;
         this.prepaid = prepaid;
@@ -30,12 +31,15 @@ public class Ticket
 
     public String getRegNum()
     {
+        // Returns the registration number
         return regNum;
     }
 
     public long differentHours(Date timeNow)
     {
+        // Does calculations to set the time stayed at car park
         long diffHours = (timeNow.getTime() - latestLeavingTime.getTime()) / (60 * 60 * 1000);
+        // Returns the time stayed
         return diffHours;
     }
 }

@@ -9,7 +9,7 @@ public class PrePaidParkingTransaction
 
         double cost = 0;
         long diffHours = tickets.differentHours(timeNow);
-
+        // If they havent over stayed then Ticket paid is printed
         if (diffHours <= 0)
         {
             System.out.println("  Length of time stayed: " + diffHours);
@@ -17,9 +17,11 @@ public class PrePaidParkingTransaction
         }
         else
         {
+            // If they over stay, it is checked how long for
             if (diffHours <= 1)
             {
                 cost = 4.70;
+                // Caculates 10% of cost
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
             else if (diffHours > 1 && diffHours <= 2)
@@ -52,9 +54,11 @@ public class PrePaidParkingTransaction
                 cost = 23.70;
                 System.out.println("  Cost: £" + (cost - (cost / 10)));
             }
+            // Calls credit card details and prints out length stayed
             System.out.println("  Length of time stayed: " + diffHours);
             creditCard.creditCardDetails();
         }
+        // Returns cost
         return cost;
     }
 

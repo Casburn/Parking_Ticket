@@ -6,8 +6,10 @@ public class DriveUpParkingTransaction
 
     public CreditCardPayment checkPaid(Ticket ticket, Date timeNow)
     {
+        // Checks if the ticket is a prepaid or drive up
         if (ticket.prepaid)
         {
+            // If it is prepaid, prints out prepaid
             PrePaidParkingTransaction prepaidTicket = new PrePaidParkingTransaction();
             System.out.println("  Ticket Type: Pre-Paid");
             prepaidTicket.prepaidParking(ticket, timeNow);
@@ -15,7 +17,7 @@ public class DriveUpParkingTransaction
         }
         else
         {
-
+            // If it is drive up prints out drive in and calls the calculations for time stayed
             System.out.println("  Ticket Type: Drive In");
             System.out.println("  Length of time stayed: " + driveInLeaveTime(ticket, timeNow) + " hour(s)");
             creditCard.creditCardDetails();
@@ -25,6 +27,7 @@ public class DriveUpParkingTransaction
 
     public double driveInLeaveTime(Ticket tickets, Date timeNow)
     {
+        // Calls calculation for time stayed and checks for what the cost will be and returns
         long diffHours = tickets.differentHours(timeNow);
         double cost = 0;
 
