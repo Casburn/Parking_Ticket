@@ -13,38 +13,56 @@ public class WeekdayCharge
         if (diffHours > 0 && diffHours <= 1)
         {
             cost = 4.70;
-            System.out.println("  Cost: £" + cost);
+        }
+        else if (diffHours <= 2)
+        {
+            cost = 7.40;
+        }
+        else if (diffHours <= 4)
+        {
+            cost = 10.30;
+        }
+        else if (diffHours <= 6)
+        {
+            cost = 14.80;
+        }
+        else if (diffHours <= 9)
+        {
+            cost = 17.80;
+        }
+        else if (diffHours <= 12)
+        {
+            cost = 20.20;
+        }
+        else if (diffHours <= 24)
+        {
+            cost = 23.70;
+        }
+
+        System.out.println("  Cost: £" + cost);
+        return cost;
+    }
+
+    public int weekendCharge(Ticket tickets, Date timeNow)
+    {
+        long diffHours = tickets.differentHours(timeNow);
+        double cost1 = 0;
+
+        if (diffHours > 0 && diffHours <= 1)
+        {
+            cost1 = 8.60;
+            System.out.println("  Cost: £" + cost1);
         }
         else if (diffHours > 1 && diffHours <= 2)
         {
-            cost = 7.40;
-            System.out.println("  Cost: £" + cost);
+            cost1 = 10.80;
+            System.out.println("  Cost: £" + cost1);
         }
-        else if (diffHours >= 3 && diffHours <= 4)
+        else
         {
-            cost = 10.30;
-            System.out.println("  Cost: £" + cost);
+            cost1 = 25.40;
+            System.out.println("  Cost: £" + cost1);
         }
-        else if (diffHours >= 5 && diffHours <= 6)
-        {
-            cost = 14.80;
-            System.out.println("  Cost: £" + cost);
-        }
-        else if (diffHours >= 7 && diffHours <= 9)
-        {
-            cost = 17.80;
-            System.out.println("  Cost: £" + cost);
-        }
-        else if (diffHours >= 10 && diffHours <= 12)
-        {
-            cost = 20.20;
-            System.out.println("  Cost: £" + cost);
-        }
-        else if (diffHours >= 13 && diffHours <= 24)
-        {
-            cost = 23.70;
-            System.out.println("  Cost: £" + cost);
-        }
-        return cost;
+        return cost1;
     }
 }
