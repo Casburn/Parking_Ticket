@@ -48,6 +48,7 @@ public class WeekdayCharge
             {
                 cost = 23.70;
             }
+            System.out.println("  Cost: £" + cost);
         }
         else
         {
@@ -64,7 +65,6 @@ public class WeekdayCharge
                 cost = 25.40;
             }
             System.out.println("  Cost: £" + cost);
-
         }
         return cost;
     }
