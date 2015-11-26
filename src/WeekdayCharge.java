@@ -3,10 +3,8 @@ import java.util.Date;
 
 public class WeekdayCharge
 {
+    // Gets details from duration calculator
     // Manages weekday charges and returns a charge based on the length of stay
-
-    // Rename method, make a new if with costs nested within it, else the weekend charge, if needs to find what day in
-    // the week it is.
     public double driveInLeaveTime(Ticket tickets, Date timeNow)
     {
 

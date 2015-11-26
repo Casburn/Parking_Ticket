@@ -3,6 +3,7 @@ import java.util.Date;
 public class DurationCalculation
 {
     // Calcutlates length of stay
+    // Gets details from transaction manager
     public long differentHours(Date timeNow)
     {
         // Does calculations to set the time stayed at car park
