@@ -1,33 +1,17 @@
+import java.util.Calendar;
 import java.util.Date;
 
-public class Ticket
+abstract class Ticket
 {
     String regNum;
 
-    Date arrivalTime;
+    Date arrivalTime = null;
 
     boolean prepaid;
 
-    Date latestLeavingTime;
+    Date latestLeavingTime = null;
 
     double lengthOfTime;
-
-    public Ticket(String regNum, Date arrivalTime, boolean prepaid, Date latestLeavingTime)
-    {
-        // Creates a constructor that calls the information that is needed
-        this.regNum = regNum;
-        this.arrivalTime = arrivalTime;
-        this.prepaid = prepaid;
-        this.latestLeavingTime = latestLeavingTime;
-    }
-
-    public Ticket(String regNum, Date arrivalTime, boolean prepaid)
-    {
-        this.regNum = regNum;
-        this.arrivalTime = arrivalTime;
-        this.prepaid = prepaid;
-        this.latestLeavingTime = arrivalTime;
-    }
 
     public String getRegNum()
     {
@@ -41,5 +25,80 @@ public class Ticket
         long diffHours = (timeNow.getTime() - latestLeavingTime.getTime()) / (60 * 60 * 1000);
         // Returns the time stayed
         return diffHours;
+    }
+
+    public void pay(Date timeNow)
+    {
+        if (differentHours(timeNow) > 0)
+        {
+            double charge = calculationCharge(this, timeNow);
+
+            // TODO - displey calcu;lation information
+
+            CreditCardPayment ccp = new CreditCardPayment();
+
+        }
+    }
+
+    public double calculationCharge(Ticket tickets, Date timeNow)
+    {
+
+        // Calls calculation for time stayed and checks for what the cost will be and returns
+
+        Calendar c = Calendar.getInstance();
+        c.setTime(timeNow);
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+
+        long diffHours = tickets.differentHours(timeNow);
+        double cost = 0;
+        if (c.DAY_OF_WEEK >= 2 && c.DAY_OF_WEEK <= 6)
+        {
+            if (diffHours > 0 && diffHours <= 1)
+            {
+                cost = 4.70;
+            }
+            else if (diffHours <= 2)
+            {
+                cost = 7.40;
+            }
+            else if (diffHours <= 4)
+            {
+                cost = 10.30;
+            }
+            else if (diffHours <= 6)
+            {
+                cost = 14.80;
+            }
+            else if (diffHours <= 9)
+            {
+                cost = 17.80;
+            }
+            else if (diffHours <= 12)
+            {
+                cost = 20.20;
+            }
+            else if (diffHours <= 24)
+            {
+                cost = 23.70;
+            }
+            System.out.println("  Cost: £" + cost);
+        }
+        else
+        {
+            if (diffHours > 0 && diffHours <= 1)
+            {
+                cost = 8.60;
+            }
+            else if (diffHours > 1 && diffHours <= 2)
+            {
+                cost = 10.80;
+            }
+            else
+            {
+                cost = 25.40;
+            }
+            System.out.println("  Cost: £" + cost);
+        }
+        return cost;
     }
 }

@@ -9,7 +9,12 @@ public class CreditCardPayment
 
     Date toDate = new Date();
 
-    public void creditCardDetails()
+    public CreditCardPayment()
+    {
+        creditCardDetails();
+    }
+
+    private void creditCardDetails()
     {
         Scanner keyboard = new Scanner(System.in);
 

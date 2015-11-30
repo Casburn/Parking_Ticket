@@ -56,7 +56,7 @@ public class PrePaidParkingTransaction
             }
             // Calls credit card details and prints out length stayed
             System.out.println("  Length of time stayed: " + diffHours);
-            creditCard.creditCardDetails();
+            // creditCard.creditCardDetails();
         }
         // Returns cost
         return cost;

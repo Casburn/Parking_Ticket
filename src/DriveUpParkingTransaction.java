@@ -20,7 +20,7 @@ public class DriveUpParkingTransaction
             // If it is drive up prints out drive in and calls the calculations for time stayed
             System.out.println("  Ticket Type: Drive In");
             System.out.println("  Length of time stayed: " + driveInLeaveTime(ticket, timeNow) + " hour(s)");
-            creditCard.creditCardDetails();
+            // creditCard.creditCardDetails();
             return creditCard;
         }
     }

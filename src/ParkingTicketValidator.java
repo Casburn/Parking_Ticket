@@ -5,7 +5,7 @@ public class ParkingTicketValidator
 
     private void validateRegNum(ParkingTicketFactory ptf)
     {
-        if (ptf.regNum != "")
+        if (ptf.regNum == null)
         {
 
         }

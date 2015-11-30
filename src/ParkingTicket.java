@@ -21,10 +21,10 @@ public class ParkingTicket
         DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
         // Creates an array list for the details of each car
         List<Ticket> tickets = new ArrayList<Ticket>();
-        tickets.add(new Ticket("SY65 OED", new Date(2015, 11, 10, 12, 0), false));
-        tickets.add(new Ticket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
-        tickets.add(new Ticket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
-        tickets.add(new Ticket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
+        tickets.add(new DriveInTicket("SY65 OED", new Date(2015, 11, 10, 12, 0), false));
+        tickets.add(new PrePaidTicket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
+        tickets.add(new DriveInTicket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
+        tickets.add(new PrePaidTicket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
         // Sets a leaving time for each car
         Date timeNow = new Date(2015, 11, 10, 17, 0);
         // Formats the different dates and times
