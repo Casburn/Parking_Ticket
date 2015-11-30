@@ -41,15 +41,15 @@ public class ParkingTicket
         // Creates a conditional loop, continue until each ticket has been ran through
         for (User user : users)
         {
-            // if (differentHours(timeNow) > 0)
-            // // {
-            // // double charge = calculationCharge(this, timeNow);
-            // //
-            // }
+            double charge = user.getTicket().calculationCharge(timeNow);
+            if (charge == 0)
+            {
+                System.out.println("PAID ");
+                break;
+            }
             // == Transaction
             // Increases the transaction number for each ticket
             int transNum = pt.increaseTransNum();
-            //
 
             System.out.println(user.getTicket());
             String userCreditCardPin = user.getPin();

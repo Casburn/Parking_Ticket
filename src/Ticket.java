@@ -39,6 +39,10 @@ abstract class Ticket
     //
     // }
     // }
+    public double calculationCharge(Date timeNow)
+    {
+        return calculationCharge(this, timeNow);
+    }
 
     public double calculationCharge(Ticket tickets, Date timeNow)
     {
