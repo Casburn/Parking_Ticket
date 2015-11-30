@@ -18,17 +18,18 @@ public class ParkingTicket
         // creates an instance of this class
         ParkingTicket pt = new ParkingTicket();
         // Makes an instance of the DriveUpParkingClass
-        DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
+        // DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
         // Creates an array list for the details of each car
         // 1. Get parking ticket details (can be from command line or file)
         List<User> users = new ArrayList<User>();
-        users.add(new User(new CreditCard("1111222233334444", "1234", new Date(2027, 11, 10, 21, 0)), "1234",
+        users.add(new User(new CreditCard("1234", "1111222233334444", new Date(2027, 11, 10, 21, 0)), "1234",
                 new DriveInTicket("SY65 OED", new Date(2015, 11, 10, 12, 0), false)));
 
-        List<Ticket> tickets = new ArrayList<Ticket>();
-        tickets.add(new PrePaidTicket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0)));
-        tickets.add(new DriveInTicket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
-        tickets.add(new PrePaidTicket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
+        // List<Ticket> tickets = new ArrayList<Ticket>();
+        // tickets.add(new PrePaidTicket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21,
+        // 0)));
+        // tickets.add(new DriveInTicket("AX09 WER", new Date(2015, 11, 10, 15, 0), false));
+        // tickets.add(new PrePaidTicket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0)));
 
         // Sets a leaving time for each car
         Date timeNow = new Date(2015, 11, 10, 17, 0);
@@ -40,6 +41,11 @@ public class ParkingTicket
         // Creates a conditional loop, continue until each ticket has been ran through
         for (User user : users)
         {
+            // if (differentHours(timeNow) > 0)
+            // // {
+            // // double charge = calculationCharge(this, timeNow);
+            // //
+            // }
             // == Transaction
             // Increases the transaction number for each ticket
             int transNum = pt.increaseTransNum();
@@ -47,23 +53,27 @@ public class ParkingTicket
 
             System.out.println(user.getTicket());
             String userCreditCardPin = user.getPin();
-            if (user.getCreditCard().isValidPin(userCreditCardPin))
-                // FIX ---
-                ;
+            if (!user.getCreditCard().isValidPin(userCreditCardPin))
+            {
+                System.err.println("Pin is not valid");
+                break;
+            }
 
             Date userCreditCardExpiry = user.getCreditCard().getExpire();
-            if (userCreditCardExpiry.before(timeNow))
-                // FIX --
-                ;
+            if (!timeNow.before(userCreditCardExpiry))
+            {
+                System.err.println("Card is out of date");
+                break;
+            }
 
-            CreditCardPayment ccp = pt.checkTicket(user, timeNow, transNum);
+            // CreditCardPayment ccp = pt.checkTicket(user, timeNow, transNum);
             // Writes information to the Authoristation log
 
-            pt.writeToLogFile("CentralLog.txt",
-                    transNum + ", " + pt.ticketInformation(user.getTicket(), dupTran, timeNow, dateFormat, timeFormat));
+            // pt.writeToLogFile("CentralLog.txt",
+            // transNum + ", " + pt.ticketInformation(user.getTicket(), dupTran, timeNow, dateFormat, timeFormat));
 
-            pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
-                    + ccp.creditNumber + ", " + dateFormatForCreditCard.format(ccp.toDate));
+            // pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
+            // + ccp.creditNumber + ", " + dateFormatForCreditCard.format(ccp.toDate));
 
         }
     }

@@ -18,7 +18,7 @@ public class CreditCard
 
     public boolean isValidPin(String pin)
     {
-        return this.pin.equals(pin);
+        return this.pin.equalsIgnoreCase(pin);
     }
 
     public String getNumber()
