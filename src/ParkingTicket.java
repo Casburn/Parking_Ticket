@@ -66,6 +66,8 @@ public class ParkingTicket
                 break;
             }
 
+            pt.checkTicket(user, timeNow, transNum);
+
             // CreditCardPayment ccp = pt.checkTicket(user, timeNow, transNum);
             // Writes information to the Authoristation log
 
