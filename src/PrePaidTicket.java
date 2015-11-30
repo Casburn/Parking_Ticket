@@ -9,6 +9,9 @@ public class PrePaidTicket extends Ticket
         this.arrivalTime = arrivalTime;
         this.prepaid = prepaid;
         this.latestLeavingTime = latestLeavingTime;
+        // 2. ParkingTicketValidator (ensures Parking ticket info is valid)
+        if (!this.isValid())
+            throw new IllegalArgumentException();
     }
 
     // Sets ticket type to prepaid

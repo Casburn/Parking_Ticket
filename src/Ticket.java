@@ -81,7 +81,6 @@ abstract class Ticket
             {
                 cost = 23.70;
             }
-            System.out.println("  Cost: £" + cost);
         }
         else
         {
@@ -97,8 +96,21 @@ abstract class Ticket
             {
                 cost = 25.40;
             }
-            System.out.println("  Cost: £" + cost);
+
         }
+        System.out.println("  Cost: £" + cost);
         return cost;
+    }
+
+    public boolean isValid()
+    {
+        // FIX - validation
+        return true;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Ticket[ RegNumbeR: " + regNum + "]";
     }
 }

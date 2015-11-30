@@ -9,6 +9,8 @@ public class DriveInTicket extends Ticket
         this.arrivalTime = arrivalTime;
         this.prepaid = prepaid;
         this.latestLeavingTime = arrivalTime;
+        if (!this.isValid())
+            throw new IllegalArgumentException();
     }
 
     // Sets ticket type to drive in
