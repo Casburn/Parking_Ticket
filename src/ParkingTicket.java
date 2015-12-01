@@ -134,7 +134,7 @@ public class ParkingTicket
         return info;
     }
 
-    public CreditCardPayment checkTicket(User user, Date timeNow, int transNum) throws IOException
+    public CreditCard checkTicket(User user, Date timeNow, int transNum) throws IOException
     {
         // Sets the display for the console and calls the information to be printed out
         DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
@@ -143,7 +143,7 @@ public class ParkingTicket
         System.out.println("  Transaction: " + transNum);
         System.out.println(dateFormat.format(timeNow));
         System.out.println("  Regestration Number: " + user.getTicket().getRegNum());
-        CreditCardPayment ccp = test.checkPaid(user.getTicket(), timeNow);
+        CreditCard ccp = test.checkPaid(user.getTicket(), timeNow);
         System.out.println("+------------------------------------------------+");
         return ccp;
     }
