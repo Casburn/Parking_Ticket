@@ -27,18 +27,6 @@ abstract class Ticket
         return diffHours;
     }
 
-    // public void pay(Date timeNow)
-    // {
-    // if (differentHours(timeNow) > 0)
-    // {
-    // double charge = calculationCharge(this, timeNow);
-    //
-    // // TODO - displey calcu;lation information
-    //
-    // CreditCardPayment ccp = new CreditCardPayment();
-    //
-    // }
-    // }
     public double calculationCharge(Date timeNow)
     {
         return calculationCharge(this, timeNow);
@@ -46,7 +34,6 @@ abstract class Ticket
 
     public double calculationCharge(Ticket tickets, Date timeNow)
     {
-
         // Calls calculation for time stayed and checks for what the cost will be and returns
 
         Calendar c = Calendar.getInstance();

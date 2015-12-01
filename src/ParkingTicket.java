@@ -66,7 +66,7 @@ public class ParkingTicket
                 break;
             }
 
-            pt.checkTicket(user, timeNow, transNum);
+            // pt.checkTicket(user, timeNow, transNum);
 
             // CreditCardPayment ccp = pt.checkTicket(user, timeNow, transNum);
             // Writes information to the Authoristation log
@@ -120,33 +120,33 @@ public class ParkingTicket
         }
     }
 
-    private String ticketInformation(Ticket ticket, DriveUpParkingTransaction dupTran, Date timeNow,
-            DateFormat dateFormat, DateFormat timeFormat) throws IOException
-    {
-        // Sets the information that is to be called and displayed in the central log
-        String info;
-        long diff = (timeNow.getTime() - ticket.arrivalTime.getTime());
-        long diffHours = diff / (60 * 60 * 1000);
-        long diffMinutes = diff / (60 * 1000) % 60;
-        info = (ticket.regNum + ", " + dateFormat.format(ticket.arrivalTime) + ", "
-                + timeFormat.format(ticket.arrivalTime) + ", " + dateFormat.format(ticket.latestLeavingTime) + ", "
-                + timeFormat.format(ticket.latestLeavingTime) + ", " + String.format("%02d", diffHours) + ":" + diffMinutes);
-        return info;
-    }
+    // private String ticketInformation(Ticket ticket, Date timeNow, DateFormat dateFormat, DateFormat timeFormat)
+    // throws IOException
+    // {
+    // // Sets the information that is to be called and displayed in the central log
+    // String info;
+    // long diff = (timeNow.getTime() - ticket.arrivalTime.getTime());
+    // long diffHours = diff / (60 * 60 * 1000);
+    // long diffMinutes = diff / (60 * 1000) % 60;
+    // info = (ticket.regNum + ", " + dateFormat.format(ticket.arrivalTime) + ", "
+    // + timeFormat.format(ticket.arrivalTime) + ", " + dateFormat.format(ticket.latestLeavingTime) + ", "
+    // + timeFormat.format(ticket.latestLeavingTime) + ", " + String.format("%02d", diffHours) + ":" + diffMinutes);
+    // return info;
+    // }
 
-    public CreditCard checkTicket(User user, Date timeNow, int transNum) throws IOException
-    {
-        // Sets the display for the console and calls the information to be printed out
-        DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
-        DriveUpParkingTransaction test = new DriveUpParkingTransaction();
-        System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
-        System.out.println("  Transaction: " + transNum);
-        System.out.println(dateFormat.format(timeNow));
-        System.out.println("  Regestration Number: " + user.getTicket().getRegNum());
-        CreditCard ccp = test.checkPaid(user.getTicket(), timeNow);
-        System.out.println("+------------------------------------------------+");
-        return ccp;
-    }
+    // public CreditCardPayment checkTicket(User user, Date timeNow, int transNum) throws IOException
+    // {
+    // // Sets the display for the console and calls the information to be printed out
+    // DateFormat dateFormat = new SimpleDateFormat("  dd/MM/yyyy");
+    // // DriveUpParkingTransaction test = new DriveUpParkingTransaction();
+    // System.out.println("      \tPARKING TICKET\n+------------------------------------------------+");
+    // System.out.println("  Transaction: " + transNum);
+    // System.out.println(dateFormat.format(timeNow));
+    // System.out.println("  Regestration Number: " + user.getTicket().getRegNum());
+    // CreditCardPayment ccp = test.checkPaid(user.getTicket(), timeNow);
+    // System.out.println("+------------------------------------------------+");
+    // return ccp;
+    // }
 
     public int increaseTransNum()
     {
