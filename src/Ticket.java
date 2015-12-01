@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -108,5 +109,11 @@ abstract class Ticket
     public String toString()
     {
         return "Ticket[ RegNumbeR: " + regNum + "]";
+    }
+
+    public String toStringShort(DateFormat dateFormat)
+    {
+
+        return regNum + ", " + dateFormat.format(arrivalTime);
     }
 }

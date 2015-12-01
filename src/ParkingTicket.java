@@ -28,7 +28,7 @@ public class ParkingTicket
                 new PrePaidTicket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0))));
         users.add(new User(new CreditCard("5678", "5555666677778888", new Date(2036, 11, 10, 21, 0)), "5678",
                 new DriveInTicket("AX09 WER", new Date(2015, 11, 10, 15, 0), false)));
-        users.add(new User(new CreditCard("2468", "0000999988887777", new Date(2018, 11, 10, 21, 0)), "2468",
+        users.add(new User(new CreditCard("2468", "0000999988887777", new Date(2014, 11, 10, 21, 0)), "2468",
                 new PrePaidTicket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0))));
 
         // Sets a leaving time for each car
@@ -37,6 +37,7 @@ public class ParkingTicket
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
         DateFormat timeFormat = new SimpleDateFormat("HH, mm");
+        DateFormat logTimeFormat = new SimpleDateFormat("ddMMyyyy, HH, mm");
 
         // Creates a conditional loop, continue until each ticket has been ran through
         for (User user : users)
@@ -59,29 +60,21 @@ public class ParkingTicket
                 break;
             }
 
+            String ccREasonOfFailure = "fail, Card is out of date";
             Date userCreditCardExpiry = user.getCreditCard().getExpire();
-            if (!timeNow.before(userCreditCardExpiry))
+            if (timeNow.before(userCreditCardExpiry))
             {
-                System.err.println("Card is out of date");
-                break;
+                // payment operation
+                ccREasonOfFailure = "pass, N/A";
             }
 
-            // pt.checkTicket(user, timeNow, transNum);
+            pt.writeToLogFile("CentralLog.txt", transNum + ", " + (user.getTicket().toStringShort(logTimeFormat))
+                    + ", " + logTimeFormat.format(timeNow) + ", " + user.getTicket().differentHours(timeNow) + ", "
+                    + user.getTicket().calculationCharge(timeNow));
 
-            // CreditCardPayment ccp = pt.checkTicket(user, timeNow, transNum);
-            // Writes information to the Authoristation log
-
-            pt.writeToLogFile(
-                    "CentralLog.txt",
-                    transNum + ", " + (user.getTicket()) + ", " + dateFormat.format(timeNow) + ", "
-                            + timeFormat.format(user.getTicket().arrivalTime) + ", " + timeFormat.format(timeNow)
-                            + ", " + user.getTicket().differentHours(timeNow) + ", "
-                            + user.getTicket().calculationCharge(timeNow));
-
-            pt.writeToLogFile("AuthorisationLog.txt",
-                    transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", " + user.getCreditCard().getNumber()
-                            + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire()) + ", "
-                            + dateFormat.format(timeNow));
+            pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
+                    + user.getCreditCard() + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire())
+                    + ", " + dateFormat.format(timeNow) + ", " + ccREasonOfFailure);
 
         }
     }

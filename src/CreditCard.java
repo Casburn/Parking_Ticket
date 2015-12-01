@@ -31,4 +31,9 @@ public class CreditCard
         return expire;
     }
 
+    @Override
+    public String toString()
+    {
+        return number;
+    }
 }
