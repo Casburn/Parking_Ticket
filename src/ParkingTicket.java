@@ -40,6 +40,8 @@ public class ParkingTicket
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
         DateFormat timeFormat = new SimpleDateFormat("HH, mm");
         DateFormat logTimeFormat = new SimpleDateFormat("ddMMyyyy, HH, mm");
+        NumberFormat GBP = NumberFormat.getCurrencyInstance(Locale.UK);
+        NumberFormat GBPNum = NumberFormat.getInstance();
 
         // Creates a conditional loop, continue until each ticket has been ran through
         for (User user : users)
@@ -72,13 +74,13 @@ public class ParkingTicket
 
             pt.writeToLogFile("CentralLog.txt", transNum + ", " + (user.getTicket().toStringShort(logTimeFormat))
                     + ", " + logTimeFormat.format(timeNow) + ", " + user.getTicket().differentHours(timeNow) + ", "
-                    + user.getTicket().calculationCharge(timeNow));
+                    + GBPNum.format(user.getTicket().calculationCharge(timeNow)));
 
             pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
                     + user.getCreditCard() + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire())
                     + ", " + dateFormat.format(timeNow) + ", " + ccREasonOfFailure);
 
-            pt.terminalDisplay(user, timeNow);
+            pt.terminalDisplay(user, timeNow, GBP);
         }
     }
 
@@ -122,9 +124,8 @@ public class ParkingTicket
         }
     }
 
-    public void terminalDisplay(User user, Date timeNow)
+    public void terminalDisplay(User user, Date timeNow, NumberFormat GBP)
     {
-        NumberFormat GBP = NumberFormat.getCurrencyInstance(Locale.UK);
         System.out.println("+-----------------------------------------+");
         System.out.println("Transaction Number: " + transactioNumber);
         System.out.println(user.getTicket().toString());
