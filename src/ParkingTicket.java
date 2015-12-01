@@ -23,16 +23,16 @@ public class ParkingTicket
         // 1. Get parking ticket details (can be from command line or file)
         List<User> users = new ArrayList<User>();
         users.add(new User(new CreditCard("1234", "1111222233334444", new Date(2027, 11, 10, 21, 0)), "1234",
-                new DriveInTicket("SY65 OED", new Date(2015, 11, 10, 12, 0), false)));
+                new DriveInTicket("SY65 OED", new Date(2015, 8, 9, 12, 0), false)));
         users.add(new User(new CreditCard("2468", "2222222222222222", new Date(2016, 11, 10, 21, 0)), "2468",
-                new PrePaidTicket("SY64 ANF", new Date(2015, 11, 10, 9, 0), true, new Date(2015, 11, 10, 21, 0))));
+                new PrePaidTicket("SY64 ANF", new Date(2015, 8, 9, 9, 0), true, new Date(2015, 8, 9, 21, 0))));
         users.add(new User(new CreditCard("5678", "5555666677778888", new Date(2036, 11, 10, 21, 0)), "5678",
-                new DriveInTicket("AX09 WER", new Date(2015, 11, 10, 15, 0), false)));
+                new DriveInTicket("AX09 WER", new Date(2015, 8, 9, 15, 0), false)));
         users.add(new User(new CreditCard("2468", "0000999988887777", new Date(2014, 11, 10, 21, 0)), "2468",
-                new PrePaidTicket("SW02 DVA", new Date(2015, 11, 10, 6, 0), true, new Date(2015, 11, 10, 8, 0))));
+                new PrePaidTicket("SW02 DVA", new Date(2015, 8, 9, 6, 0), true, new Date(2015, 8, 9, 8, 0))));
 
         // Sets a leaving time for each car
-        Date timeNow = new Date(2015, 11, 10, 17, 0);
+        Date timeNow = new Date(2015, 8, 9, 17, 0);
         // Formats the different dates and times
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");

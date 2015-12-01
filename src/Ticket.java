@@ -41,14 +41,13 @@ abstract class Ticket
     public double calculationCharge(Ticket tickets, Date timeNow)
     {
         // Calls calculation for time stayed and checks for what the cost will be and returns
-
+        long diffHours = tickets.differentHours(timeNow);
         Calendar c = Calendar.getInstance();
         c.setTime(timeNow);
         int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
-        long diffHours = tickets.differentHours(timeNow);
         double cost = 0;
-        if (c.DAY_OF_WEEK >= 2 && c.DAY_OF_WEEK <= 6)
+        if (dayOfWeek >= 2 && dayOfWeek <= 5)
         {
             if (diffHours > 0 && diffHours <= 1)
             {
@@ -98,11 +97,6 @@ abstract class Ticket
         {
             cost = cost - (cost / 10);
         }
-        else
-        {
-            cost = cost;
-        }
-        // System.out.println("  Cost: £" + cost);
         return cost;
     }
 
