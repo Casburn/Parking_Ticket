@@ -3,10 +3,12 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ParkingTicket
 {
@@ -122,11 +124,12 @@ public class ParkingTicket
 
     public void terminalDisplay(User user, Date timeNow)
     {
+        NumberFormat GBP = NumberFormat.getCurrencyInstance(Locale.UK);
         System.out.println("+-----------------------------------------+");
         System.out.println("Transaction Number: " + transactioNumber);
         System.out.println(user.getTicket().toString());
         System.out.println("Length Stayed: " + user.getTicket().differentHours(timeNow) + " hour(s)");
-        System.out.println("Amount Due: £" + user.getTicket().calculationCharge(timeNow));
+        System.out.println("Amount Due: " + GBP.format(user.getTicket().calculationCharge(timeNow)));
         System.out.println("+-----------------------------------------+\n");
     }
 
