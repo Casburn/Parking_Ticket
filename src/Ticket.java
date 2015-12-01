@@ -24,6 +24,11 @@ abstract class Ticket
         // Does calculations to set the time stayed at car park
         long diffHours = (timeNow.getTime() - latestLeavingTime.getTime()) / (60 * 60 * 1000);
         // Returns the time stayed
+
+        if (diffHours < 0)
+        {
+            diffHours = diffHours - diffHours - diffHours;
+        }
         return diffHours;
     }
 
