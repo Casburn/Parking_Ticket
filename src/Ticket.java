@@ -81,11 +81,11 @@ abstract class Ticket
         }
         else
         {
-            if (diffHours > 0 && diffHours <= 1)
+            if (diffHours <= 1)
             {
                 cost = 8.60;
             }
-            else if (diffHours > 1 && diffHours <= 2)
+            else if (diffHours <= 2)
             {
                 cost = 10.80;
             }
@@ -93,9 +93,16 @@ abstract class Ticket
             {
                 cost = 25.40;
             }
-
         }
-        System.out.println("  Cost: £" + cost);
+        if (prepaid)
+        {
+            cost = cost - (cost / 10);
+        }
+        else
+        {
+            cost = cost;
+        }
+        // System.out.println("  Cost: £" + cost);
         return cost;
     }
 
