@@ -1,5 +1,4 @@
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -8,20 +7,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class ParkingTicket
 {
     private int transactioNumber = 0;
 
     @SuppressWarnings("deprecation")
-    public static void main(String[] args) throws FileNotFoundException, IOException
+    public static void main(String[] args) throws IOException
     {
-        // creates an instance of this class
         ParkingTicket pt = new ParkingTicket();
-        // Makes an instance of the DriveUpParkingClass
-        // DriveUpParkingTransaction dupTran = new DriveUpParkingTransaction();
-        // Creates an array list for the details of each car
         // 1. Get parking ticket details (can be from command line or file)
         List<User> users = new ArrayList<User>();
         users.add(new User(new CreditCard("1234", "1111222233334444", new Date(2027, 11, 10, 21, 0)), "1234",
@@ -33,17 +27,12 @@ public class ParkingTicket
         users.add(new User(new CreditCard("2468", "0000999988887777", new Date(2014, 11, 10, 21, 0)), "2468",
                 new PrePaidTicket("SW02 DVA", new Date(2015, 8, 9, 6, 0), true, new Date(2015, 8, 9, 8, 0))));
 
-        // Sets a leaving time for each car
         Date timeNow = new Date(2015, 8, 9, 17, 0);
-        // Formats the different dates and times
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
-        DateFormat timeFormat = new SimpleDateFormat("HH, mm");
         DateFormat logTimeFormat = new SimpleDateFormat("ddMMyyyy, HH, mm");
-        NumberFormat GBP = NumberFormat.getCurrencyInstance(Locale.UK);
         NumberFormat GBPNum = NumberFormat.getInstance();
 
-        // Creates a conditional loop, continue until each ticket has been ran through
         for (User user : users)
         {
             double charge = user.getTicket().calculationCharge(timeNow);
@@ -53,7 +42,6 @@ public class ParkingTicket
                 break;
             }
             // == Transaction
-            // Increases the transaction number for each ticket
             int transNum = pt.increaseTransNum();
 
             System.out.println(user.getTicket());
@@ -79,19 +67,15 @@ public class ParkingTicket
             pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
                     + user.getCreditCard() + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire())
                     + ", " + dateFormat.format(timeNow) + ", " + ccREasonOfFailure);
-
-            // pt.terminalDisplay(user, timeNow, GBP);
         }
     }
 
     private void writeToLogFile(String fileName, String msg)
     {
-        // Creates a file writer
         FileWriter writer = null;
         BufferedWriter bufferedWriter = null;
         try
         {
-            // Writes the information to each file
             writer = new FileWriter(fileName, true);
             bufferedWriter = new BufferedWriter(writer);
             bufferedWriter.write(msg);
@@ -124,19 +108,8 @@ public class ParkingTicket
         }
     }
 
-    public void terminalDisplay(User user, Date timeNow, NumberFormat GBP)
-    {
-        System.out.println("+-----------------------------------------+");
-        System.out.println("Transaction Number: " + transactioNumber);
-        System.out.println(user.getTicket().toString());
-        System.out.println("Length Stayed: " + user.getTicket().diffInHours(timeNow) + " hour(s)");
-        System.out.println("Amount Due: " + GBP.format(user.getTicket().calculationCharge(timeNow)));
-        System.out.println("+-----------------------------------------+\n");
-    }
-
     public int increaseTransNum()
     {
-        // Increases the transaction number
         transactioNumber++;
         return transactioNumber;
     }

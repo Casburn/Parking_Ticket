@@ -118,7 +118,6 @@ abstract class Ticket
 
     public String toStringShort(DateFormat dateFormat)
     {
-
         return regNum + ", " + dateFormat.format(arrivalTime);
     }
 
