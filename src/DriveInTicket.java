@@ -8,7 +8,7 @@ public class DriveInTicket extends Ticket
         this.regNum = regNum;
         this.arrivalTime = arrivalTime;
         this.prepaid = prepaid;
-        this.latestLeavingTime = arrivalTime;
+        this.leavingTime = arrivalTime;
         if (!this.isValid())
             throw new IllegalArgumentException();
     }

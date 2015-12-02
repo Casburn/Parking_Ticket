@@ -12,6 +12,13 @@ public class ParkingTicket
 {
     private int transactioNumber = 0;
 
+    public int getTransactioNumber()
+    {
+        return transactioNumber;
+    }
+
+    private Date timeNow;
+
     @SuppressWarnings("deprecation")
     public static void main(String[] args) throws IOException
     {
@@ -27,15 +34,16 @@ public class ParkingTicket
         users.add(new User(new CreditCard("2468", "0000999988887777", new Date(2014, 11, 10, 21, 0)), "2468",
                 new PrePaidTicket("SW02 DVA", new Date(2015, 8, 9, 6, 0), true, new Date(2015, 8, 9, 8, 0))));
 
-        Date timeNow = new Date(2015, 8, 9, 17, 0);
+        pt.setTimeNow(new Date(2015, 8, 9, 17, 0));
+
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
-        DateFormat logTimeFormat = new SimpleDateFormat("ddMMyyyy, HH, mm");
+        DateFormat logTimeFormat = new SimpleDateFormat("ddMMyy, HH, mm");
         NumberFormat GBPNum = NumberFormat.getInstance();
 
         for (User user : users)
         {
-            double charge = user.getTicket().calculationCharge(timeNow);
+            double charge = user.getTicket().calculationCharge(pt.getTimeNow());
             if (charge == 0)
             {
                 System.out.println("PAID ");
@@ -54,20 +62,36 @@ public class ParkingTicket
 
             String ccREasonOfFailure = "fail, Card is out of date";
             Date userCreditCardExpiry = user.getCreditCard().getExpire();
-            if (timeNow.before(userCreditCardExpiry))
+            if (pt.getTimeNow().before(userCreditCardExpiry))
             {
                 // payment operation
                 ccREasonOfFailure = "pass, N/A";
             }
+            System.out.println(user.getTicket().print(pt));
 
-            pt.writeToLogFile("CentralLog.txt", transNum + ", " + (user.getTicket().toStringShort(logTimeFormat))
-                    + ", " + logTimeFormat.format(timeNow) + ", " + user.getTicket().diffInHours(timeNow) + ", "
-                    + GBPNum.format(user.getTicket().calculationCharge(timeNow)));
+            pt.writeToLogFile(
+                    "CentralLog.txt",
+                    transNum + ", " + (user.getTicket().toStringShort(logTimeFormat)) + ", "
+                            + logTimeFormat.format(pt.getTimeNow()) + ", "
+                            + user.getTicket().diffInHours(pt.getTimeNow()) + ", "
+                            + GBPNum.format(user.getTicket().calculationCharge(pt.getTimeNow())));
 
-            pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
-                    + user.getCreditCard() + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire())
-                    + ", " + dateFormat.format(timeNow) + ", " + ccREasonOfFailure);
+            pt.writeToLogFile(
+                    "AuthorisationLog.txt",
+                    transNum + ", " + (user.getTicket().isPrepaid() ? "D" : "O") + ", " + user.getCreditCard() + ", "
+                            + dateFormatForCreditCard.format(user.getCreditCard().getExpire()) + ", "
+                            + dateFormat.format(pt.getTimeNow()) + ", " + ccREasonOfFailure);
         }
+    }
+
+    public Date getTimeNow()
+    {
+        return timeNow;
+    }
+
+    private void setTimeNow(Date timeNow)
+    {
+        this.timeNow = timeNow;
     }
 
     private void writeToLogFile(String fileName, String msg)

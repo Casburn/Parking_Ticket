@@ -8,7 +8,7 @@ public class PrePaidTicket extends Ticket
         this.regNum = regNum;
         this.arrivalTime = arrivalTime;
         this.prepaid = prepaid;
-        this.latestLeavingTime = latestLeavingTime;
+        this.leavingTime = latestLeavingTime;
         // 2. ParkingTicketValidator (ensures Parking ticket info is valid)
         if (!this.isValid())
             throw new IllegalArgumentException();

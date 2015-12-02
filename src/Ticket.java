@@ -6,13 +6,13 @@ import java.util.Locale;
 
 abstract class Ticket
 {
-    String regNum;
+    protected String regNum;
 
-    Date arrivalTime = null;
+    protected Date arrivalTime = null;
 
-    boolean prepaid;
+    protected boolean prepaid;
 
-    Date latestLeavingTime = null;
+    protected Date leavingTime = null;
 
     public String getRegNum()
     {
@@ -23,7 +23,7 @@ abstract class Ticket
     public long diffInHours(Date timeNow)
     {
         // Does calculations to set the time stayed at car park
-        long diffHours = (timeNow.getTime() - latestLeavingTime.getTime()) / (60 * 60 * 1000);
+        long diffHours = (timeNow.getTime() - leavingTime.getTime()) / (60 * 60 * 1000);
         // Returns the time stayed
 
         if (diffHours < 0)
@@ -93,7 +93,7 @@ abstract class Ticket
                 cost = 25.40;
             }
         }
-        if (prepaid)
+        if (isPrepaid())
         {
             cost = cost - (cost / 10);
         }
@@ -109,11 +109,21 @@ abstract class Ticket
     @Override
     public String toString()
     {
-        ParkingTicket pt = new ParkingTicket();
-        return "[ Ticket ==================]\n" + String.format("[ Transaction Number: %5s]\n", pt.increaseTransNum())
-                + String.format("[ RegNumber: %14s]\n", regNum)
-                + String.format("[ Length Stayed: %10s]\n", lengthOfTimeStayed())
-                + String.format("[ Total Cost: %13s]", totalCost()) + "\n[__________________________]\n";
+        return "[ Machine =========================================]\n"
+                + String.format("[ RegNumber: %38s]%n", regNum)
+                + String.format("[ Arriving Time: %34s]%n", arrivalTime.toString())
+                + ((leavingTime.compareTo(arrivalTime) > 0) ? "[ Prepaid ticket till: " + leavingTime.toString() + "]"
+                        : "[Drive in                                          ]")
+                + "\n[__________________________________________________]\n";
+    }
+
+    public String print(ParkingTicket pt)
+    {
+        return "[ Ticket ==================]\n"
+                + String.format("[ Transaction Number: %5s]\n", pt.getTransactioNumber())
+                + String.format("[ RegNumber: %14s]%n", regNum)
+                + String.format("[ Length Stayed: %10s]\n", lengthOfTimeStayed(pt.getTimeNow()))
+                + String.format("[ Total Cost: %13s]", totalCost(pt.getTimeNow())) + "\n[__________________________]\n";
     }
 
     public String toStringShort(DateFormat dateFormat)
@@ -121,22 +131,25 @@ abstract class Ticket
         return regNum + ", " + dateFormat.format(arrivalTime);
     }
 
-    public long lengthOfTimeStayed()
+    public long lengthOfTimeStayed(Date timeNow)
     {
-        Date timeNow = new Date(2015, 8, 9, 17, 0);
         long lengthOfTime;
         lengthOfTime = diffInHours(timeNow);
         return lengthOfTime;
 
     }
 
-    public String totalCost()
+    public String totalCost(Date timeNow)
     {
-        Date timeNow = new Date(2015, 8, 9, 17, 0);
         String costTotal;
         NumberFormat GBP = NumberFormat.getCurrencyInstance(Locale.UK);
         costTotal = GBP.format(calculationCharge(timeNow));
 
         return costTotal;
+    }
+
+    public boolean isPrepaid()
+    {
+        return prepaid;
     }
 }
