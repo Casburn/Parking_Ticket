@@ -12,12 +12,12 @@ public class ParkingTicket
 {
     private int transactioNumber = 0;
 
+    private Date timeNow;
+
     public int getTransactioNumber()
     {
         return transactioNumber;
     }
-
-    private Date timeNow;
 
     @SuppressWarnings("deprecation")
     public static void main(String[] args) throws IOException
