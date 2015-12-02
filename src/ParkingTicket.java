@@ -73,14 +73,14 @@ public class ParkingTicket
             }
 
             pt.writeToLogFile("CentralLog.txt", transNum + ", " + (user.getTicket().toStringShort(logTimeFormat))
-                    + ", " + logTimeFormat.format(timeNow) + ", " + user.getTicket().differentHours(timeNow) + ", "
+                    + ", " + logTimeFormat.format(timeNow) + ", " + user.getTicket().diffInHours(timeNow) + ", "
                     + GBPNum.format(user.getTicket().calculationCharge(timeNow)));
 
             pt.writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().prepaid ? "D" : "O") + ", "
                     + user.getCreditCard() + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire())
                     + ", " + dateFormat.format(timeNow) + ", " + ccREasonOfFailure);
 
-            pt.terminalDisplay(user, timeNow, GBP);
+            // pt.terminalDisplay(user, timeNow, GBP);
         }
     }
 
@@ -129,7 +129,7 @@ public class ParkingTicket
         System.out.println("+-----------------------------------------+");
         System.out.println("Transaction Number: " + transactioNumber);
         System.out.println(user.getTicket().toString());
-        System.out.println("Length Stayed: " + user.getTicket().differentHours(timeNow) + " hour(s)");
+        System.out.println("Length Stayed: " + user.getTicket().diffInHours(timeNow) + " hour(s)");
         System.out.println("Amount Due: " + GBP.format(user.getTicket().calculationCharge(timeNow)));
         System.out.println("+-----------------------------------------+\n");
     }
