@@ -1,11 +1,14 @@
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 abstract class Ticket
 {
+    DateFormat timeFormat = new SimpleDateFormat("dd/MM/yy, HH:mm");
+
     protected String regNum;
 
     protected Date arrivalTime = null;
@@ -16,8 +19,12 @@ abstract class Ticket
 
     public String getRegNum()
     {
-        // Returns the registration number
         return regNum;
+    }
+
+    public boolean isValid()
+    {
+        return (regNum.length() > 0) && (leavingTime.compareTo(arrivalTime) >= 0);
     }
 
     public long diffInHours(Date timeNow)
@@ -100,26 +107,20 @@ abstract class Ticket
         return cost;
     }
 
-    public boolean isValid()
-    {
-        // FIX - validation
-        return true;
-    }
-
     @Override
     public String toString()
     {
-        return "[ Machine =========================================]\n"
-                + String.format("[ RegNumber: %38s]%n", regNum)
-                + String.format("[ Arriving Time: %34s]%n", arrivalTime.toString())
-                + ((leavingTime.compareTo(arrivalTime) > 0) ? "[ Prepaid ticket till: " + leavingTime.toString() + "]"
-                        : "[Drive in                                          ]")
-                + "\n[__________________________________________________]\n";
+        return "[ Ticket ==============================]\n"
+                + String.format("[ RegNumber: %26s]%n", regNum)
+                + String.format("[ Arriving Time: %22s]%n", timeFormat.format(arrivalTime))
+                + ((leavingTime.compareTo(arrivalTime) > 0) ? "[ Prepaid ticket till:  "
+                        + timeFormat.format(leavingTime) + "]" : "[ Drive in                             ]")
+                + "\n[______________________________________]\n";
     }
 
     public String print(ParkingTicket pt)
     {
-        return "[ Ticket ==================]\n"
+        return "[ Bill ====================]\n"
                 + String.format("[ Transaction Number: %5s]\n", pt.getTransactioNumber())
                 + String.format("[ RegNumber: %14s]%n", regNum)
                 + String.format("[ Length Stayed: %10s]\n", lengthOfTimeStayed(pt.getTimeNow()))
@@ -151,5 +152,15 @@ abstract class Ticket
     public boolean isPrepaid()
     {
         return prepaid;
+    }
+
+    public DateFormat getLogTimeFormat()
+    {
+        return timeFormat;
+    }
+
+    public void setLogTimeFormat(DateFormat logTimeFormat)
+    {
+        this.timeFormat = logTimeFormat;
     }
 }

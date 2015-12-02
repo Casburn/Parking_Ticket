@@ -29,7 +29,7 @@ public class ParkingTicket
                 new DriveInTicket("SY65 OED", new Date(2015, 8, 9, 12, 0), false)));
         users.add(new User(new CreditCard("2468", "2222222222222222", new Date(2016, 11, 10, 21, 0)), "2468",
                 new PrePaidTicket("SY64 ANF", new Date(2015, 8, 9, 9, 0), true, new Date(2015, 8, 9, 21, 0))));
-        users.add(new User(new CreditCard("5678", "5555666677778888", new Date(2036, 11, 10, 21, 0)), "5678",
+        users.add(new User(new CreditCard("5678", "5555666677778888", new Date(2036, 11, 10, 21, 0)), "5668",
                 new DriveInTicket("AX09 WER", new Date(2015, 8, 9, 15, 0), false)));
         users.add(new User(new CreditCard("2468", "0000999988887777", new Date(2014, 11, 10, 21, 0)), "2468",
                 new PrePaidTicket("SW02 DVA", new Date(2015, 8, 9, 6, 0), true, new Date(2015, 8, 9, 8, 0))));
@@ -38,7 +38,7 @@ public class ParkingTicket
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
         DateFormat dateFormatForCreditCard = new SimpleDateFormat("ddMMyyyy");
-        DateFormat logTimeFormat = new SimpleDateFormat("ddMMyy, HH, mm");
+        DateFormat logTimeFormat = new SimpleDateFormat("ddMMyy, HH:mm");
         NumberFormat GBPNum = NumberFormat.getInstance();
 
         for (User user : users)
@@ -69,18 +69,13 @@ public class ParkingTicket
             }
             System.out.println(user.getTicket().print(pt));
 
-            pt.writeToLogFile(
-                    "CentralLog.txt",
-                    transNum + ", " + (user.getTicket().toStringShort(logTimeFormat)) + ", "
-                            + logTimeFormat.format(pt.getTimeNow()) + ", "
-                            + user.getTicket().diffInHours(pt.getTimeNow()) + ", "
-                            + GBPNum.format(user.getTicket().calculationCharge(pt.getTimeNow())));
+            writeToLogFile("CentralLog.txt", transNum + ", " + (user.getTicket().toStringShort(logTimeFormat)) + ", "
+                    + logTimeFormat.format(pt.getTimeNow()) + ", " + user.getTicket().diffInHours(pt.getTimeNow())
+                    + ", " + GBPNum.format(user.getTicket().calculationCharge(pt.getTimeNow())));
 
-            pt.writeToLogFile(
-                    "AuthorisationLog.txt",
-                    transNum + ", " + (user.getTicket().isPrepaid() ? "O" : "D") + ", " + user.getCreditCard() + ", "
-                            + dateFormatForCreditCard.format(user.getCreditCard().getExpire()) + ", "
-                            + dateFormat.format(pt.getTimeNow()) + ", " + ccREasonOfFailure);
+            writeToLogFile("AuthorisationLog.txt", transNum + ", " + (user.getTicket().isPrepaid() ? "O" : "D") + ", "
+                    + user.getCreditCard() + ", " + dateFormatForCreditCard.format(user.getCreditCard().getExpire())
+                    + ", " + dateFormat.format(pt.getTimeNow()) + ", " + ccREasonOfFailure);
         }
     }
 
@@ -94,7 +89,7 @@ public class ParkingTicket
         this.timeNow = timeNow;
     }
 
-    private void writeToLogFile(String fileName, String msg)
+    static private void writeToLogFile(String fileName, String msg)
     {
         FileWriter writer = null;
         BufferedWriter bufferedWriter = null;
