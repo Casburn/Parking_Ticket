@@ -78,7 +78,7 @@ public class ParkingTicket
 
             pt.writeToLogFile(
                     "AuthorisationLog.txt",
-                    transNum + ", " + (user.getTicket().isPrepaid() ? "D" : "O") + ", " + user.getCreditCard() + ", "
+                    transNum + ", " + (user.getTicket().isPrepaid() ? "O" : "D") + ", " + user.getCreditCard() + ", "
                             + dateFormatForCreditCard.format(user.getCreditCard().getExpire()) + ", "
                             + dateFormat.format(pt.getTimeNow()) + ", " + ccREasonOfFailure);
         }
